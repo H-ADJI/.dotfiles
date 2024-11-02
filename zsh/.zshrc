@@ -209,3 +209,7 @@ scrapy_fzf_insert() {
 # Define the widget and bind it to Ctrl+g
 zle -N scrapy_fzf_insert
 bindkey '^g' scrapy_fzf_insert
+# loading zsh custom completions 
+fpath=(~/.zsh/completions $fpath)
+autoload -Uz compinit
+compinit
