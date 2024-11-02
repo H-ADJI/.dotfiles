@@ -104,6 +104,7 @@ PATH="$HOME/.local/bin:$PATH"
 PATH="$HOME/nvim/bin:$PATH"
 PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:~/apps
+PATH=$PATH:~/go/bin
 alias py="python3.10"
 alias nv="nvim"
 alias venv_create="py -m venv venv"
