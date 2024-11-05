@@ -17,7 +17,7 @@ return {
       javascript = { "prettierd" },
       markdown = { "prettierd" },
       scss = { "prettierd" },
-      kdl = { "kdlfmt" },
+      -- kdl = { "kdlfmt" },
       -- ["_"] = { "shfmt" },
     },
     formatters = {
