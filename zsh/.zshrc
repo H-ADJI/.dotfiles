@@ -132,3 +132,4 @@ fpath=(~/.zsh/completions $fpath)
 autoload -Uz compinit
 compinit
 # zprof
+  [[ -f "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh" ]] && source "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh"
