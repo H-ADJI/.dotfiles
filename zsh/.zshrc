@@ -24,6 +24,7 @@ PATH=$PATH:~/apps
 PATH=$PATH:~/go/bin
 # aliases
 alias zshconfig="nv ~/.zshrc"
+alias nvconfig="nv ~/.config/nvim/init.lua"
 alias py="python3.10"
 alias nv="nvim"
 alias venv_create="py -m venv venv"
