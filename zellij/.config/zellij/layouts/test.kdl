@@ -1,0 +1,9 @@
+layout {
+    pane  {
+        cwd "~/dataimpact-scraping/"
+    }
+    pane split_direction="vertical" {
+        pane
+        pane 
+    }
+}
