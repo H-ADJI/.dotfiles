@@ -1,9 +1,14 @@
 layout {
-    pane  {
-        cwd "~/dataimpact-scraping/"
+    cwd "~/dataimpact-scraping/"
+    tab {
+        pane edit="." {
+            cwd "~/dataimpact-scraping/"
+        }
     }
-    pane split_direction="vertical" {
-        pane
-        pane 
+    tab {
+        pane split_direction="vertical" {
+            pane
+            pane
+        }
     }
 }
