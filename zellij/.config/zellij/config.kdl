@@ -225,3 +225,4 @@ scroll_buffer_size 47_000
 scrollback_editor "/home/khalil/apps/nvim"
 layout_dir "/home/khalil/.config/zellij/layouts"
 default_mode "locked"
+copy_command "xclip -selection clipboard" // x11
