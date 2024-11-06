@@ -1,0 +1,7 @@
+layout {
+    cwd "~/dataimpact-scraping/"
+    tab {
+        pane edit=".env"
+    }
+    tab 
+}
