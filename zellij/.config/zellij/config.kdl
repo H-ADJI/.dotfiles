@@ -1,8 +1,5 @@
 // If you'd like to override the default keybindings completely, be sure to change "keybinds" to "keybinds clear-defaults=true"
 keybinds {
-    locked {
-        bind "Ctrl l" { SwitchToMode "normal"; }
-    }
     resize {
         bind "Ctrl n" { SwitchToMode "Normal"; }
         bind "h" "Left" { Resize "Increase Left"; }
@@ -155,7 +152,7 @@ keybinds {
         bind "x" { CloseFocus; SwitchToMode "Normal"; }
     }
     shared_except "locked" {
-        bind "Ctrl l" { SwitchToMode "Locked"; }
+        bind "Ctrl g" { SwitchToMode "Locked"; }
         bind "q" { Quit; }
         bind "Alt f" { ToggleFloatingPanes; }
         bind "Alt n" { NewPane; }

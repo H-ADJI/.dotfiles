@@ -16,8 +16,3 @@ layout {
         pane
     }
 }
-keybinds {
-    shared_except "locked" {
-        bind "Ctrl l" { SwitchToMode "Locked"; }
-  }
-}
