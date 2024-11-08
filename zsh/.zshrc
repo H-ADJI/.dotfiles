@@ -136,4 +136,4 @@ autoload -Uz compinit
 compinit
 # zprof
   [[ -f "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh" ]] && source "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh"
-eval "$(zellij setup --generate-auto-start zsh)"
+# eval "$(zellij setup --generate-auto-start zsh)"
