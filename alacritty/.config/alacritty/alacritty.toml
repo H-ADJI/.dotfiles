@@ -33,3 +33,7 @@ yellow = "#e0af68"
 [colors.primary]
 background = "#1a1b26"
 foreground = "#a9b1d6"
+
+[shell]
+program = "/bin/zsh"
+# args = ["-c", "zellij"]
