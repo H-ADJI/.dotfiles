@@ -131,9 +131,11 @@ scrapy_fzf_insert() {
 zle -N scrapy_fzf_insert
 bindkey '^f' scrapy_fzf_insert
 # loading zsh custom completions 
-fpath=(~/.zsh/completions $fpath)
-autoload -Uz compinit
-compinit
+# fpath=(~/.zsh/completions $fpath)
+# autoload -Uz compinit
+# compinit
+# autoload -U +X compinit && compinit
+# . <( zellij setup --generate-completion zsh | sed -Ee 's/^(_(zellij) ).*/compdef \1\2/' )
 # zprof
   [[ -f "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh" ]] && source "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh"
 # eval "$(zellij setup --generate-auto-start zsh)"
