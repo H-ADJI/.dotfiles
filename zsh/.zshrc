@@ -137,5 +137,5 @@ bindkey '^f' scrapy_fzf_insert
 # autoload -U +X compinit && compinit
 # . <( zellij setup --generate-completion zsh | sed -Ee 's/^(_(zellij) ).*/compdef \1\2/' )
 # zprof
-  [[ -f "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh" ]] && source "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh"
+  # [[ -f "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh" ]] && source "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh"
 # eval "$(zellij setup --generate-auto-start zsh)"
