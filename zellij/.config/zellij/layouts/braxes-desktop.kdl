@@ -21,9 +21,13 @@ layout {
           command "npm"
           args "run" "dev-js"
         }
-        pane {
+        pane split_direction="horizontal"{
+          pane {
           command "npm"
           args "run" "dev-start"
+          }
+          pane cws="~/braxes-backend/"{
+          command "air"
         }
     }
 }

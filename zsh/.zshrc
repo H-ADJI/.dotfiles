@@ -22,6 +22,7 @@ PATH="$HOME/nvim/bin:$PATH"
 PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:~/apps
 PATH=$PATH:~/go/bin
+PATH=$PATH:~/.cargo/bin
 # aliases
 alias zshconfig="nv ~/.zshrc"
 alias nvconfig="nv ~/.config/nvim/init.lua"
