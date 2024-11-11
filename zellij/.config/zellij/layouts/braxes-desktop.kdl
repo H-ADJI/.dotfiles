@@ -12,22 +12,28 @@ layout {
     generic-tab {
         pane edit="."
     }
+    generic-tab cwd="~/braxes-backend/" {
+        pane edit="~/braxes-backend/main.go"
+    }
     generic-tab {
-        pane {
-          command "npm"
-          args "run" "dev-js"
+        pane split_direction="vertical" {
+            pane {
+                command "npm"
+                args "run" "dev-js"
+            }
+            pane {
+                command "npm"
+                args "run" "dev-js"
+            }
         }
-        pane {
-          command "npm"
-          args "run" "dev-js"
-        }
-        pane split_direction="horizontal"{
-          pane {
-          command "npm"
-          args "run" "dev-start"
-          }
-          pane cws="~/braxes-backend/"{
-          command "air"
+        pane split_direction="vertical" {
+            pane {
+                command "npm"
+                args "run" "dev-start"
+            }
+            pane cwd="~/braxes-backend/" {
+                command "air"
+            }
         }
     }
 }
