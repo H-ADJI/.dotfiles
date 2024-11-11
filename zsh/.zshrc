@@ -6,7 +6,8 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 COMPLETION_WAITING_DOTS="true"
-plugins=(git direnv nvm)
+# plugins=(git direnv nvm)
+plugins=(evalcache zsh-nvm git npm docker docker-compose)
 zstyle ':omz:plugins:nvm' lazy yes
 source $ZSH/oh-my-zsh.sh
 # export EDITOR="/home/khalil/apps/nvim"
@@ -140,3 +141,7 @@ bindkey '^f' scrapy_fzf_insert
 # zprof
   # [[ -f "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh" ]] && source "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh"
 # eval "$(zellij setup --generate-auto-start zsh)"
+# Install Ruby Gems to ~/gems
+export PATH="$HOME/.rbenv/bin:$PATH"
+_evalcache rbenv init -
+_evalcache direnv hook zsh
