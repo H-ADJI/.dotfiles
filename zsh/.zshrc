@@ -7,8 +7,9 @@ COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 COMPLETION_WAITING_DOTS="true"
 # plugins=(git direnv nvm)
-plugins=(evalcache zsh-nvm git npm docker docker-compose)
-zstyle ':omz:plugins:nvm' lazy yes
+# plugins=(evalcache zsh-nvm git npm docker docker-compose)
+plugins=(evalcache git npm docker docker-compose)
+# zstyle ':omz:plugins:nvm' lazy yes
 source $ZSH/oh-my-zsh.sh
 # export EDITOR="/home/khalil/apps/nvim"
 # Preferred editor for local and remote sessions
@@ -105,9 +106,9 @@ alias ls="eza --color=always --git --no-filesize --icons=always --no-time --no-u
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
-export NVM_DIR="$HOME/.nvm"
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 # for scrapy fuzzy search
 scrapy_fzf_insert() {
     # Run FZF with a custom appearance
@@ -138,10 +139,10 @@ bindkey '^f' scrapy_fzf_insert
 # compinit
 # autoload -U +X compinit && compinit
 # . <( zellij setup --generate-completion zsh | sed -Ee 's/^(_(zellij) ).*/compdef \1\2/' )
-# zprof
   # [[ -f "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh" ]] && source "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh"
 # eval "$(zellij setup --generate-auto-start zsh)"
 # Install Ruby Gems to ~/gems
 export PATH="$HOME/.rbenv/bin:$PATH"
 _evalcache rbenv init -
 _evalcache direnv hook zsh
+# zprof
