@@ -24,6 +24,7 @@ PATH=$PATH:~/go/bin
 PATH=$PATH:~/.cargo/bin
 # aliases
 alias zshconfig="nv ~/.zshrc"
+alias tmuxconfig="nv ~/.tmux.conf"
 alias nvconfig="nv ~/.config/nvim/init.lua"
 alias dotconfig="nv ~/.dotfiles"
 alias py="python3.10"
