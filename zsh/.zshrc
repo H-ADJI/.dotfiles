@@ -8,13 +8,13 @@ COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 COMPLETION_WAITING_DOTS="true"
 plugins=(evalcache git npm docker docker-compose)
 source $ZSH/oh-my-zsh.sh
-# export EDITOR="/home/khalil/apps/nvim"
+export EDITOR="/home/khalil/apps/nvim"
 # Preferred editor for local and remote sessions
-# if [[ -n $SSH_CONNECTION ]]; then
-#   export EDITOR='vim'
-# else
-#   export EDITOR='mvim'
-# fi
+if [[ -n $SSH_CONNECTION ]]; then
+  export EDITOR='vim'
+else
+  export EDITOR='nvim'
+fi
 # PATH
 PATH="$HOME/.local/bin:$PATH"
 PATH="$HOME/nvim/bin:$PATH"
@@ -139,4 +139,5 @@ bindkey '^f' scrapy_fzf_insert
 export PATH="$HOME/.rbenv/bin:$PATH"
 _evalcache rbenv init -
 _evalcache direnv hook zsh
+eval "$(tmuxifier init -)"
 # zprof
