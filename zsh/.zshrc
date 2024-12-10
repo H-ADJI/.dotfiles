@@ -25,6 +25,7 @@ PATH=$PATH:~/.cargo/bin
 # aliases
 alias zshconfig="nv ~/.zshrc"
 alias tmuxconfig="nv ~/.tmux.conf"
+alias kittyconf="nv ~/.config/kitty/kitty.conf"
 alias nvconfig="nv ~/.config/nvim/init.lua"
 alias dotconfig="nv ~/.dotfiles"
 alias py="python3.10"
@@ -40,6 +41,40 @@ alias cpc="xclip -sel c"
 alias list_devices="ls /home/khalil/.android/avd"
 alias launch_device='/home/khalil/Android/Sdk/emulator/emulator -avd Pixel_XL_API_31 -writable-system '
 alias androidStudio="/home/khalil/android-studio/bin/studio.sh"
+alias csv_to_json="jq -Rsn '(input | split(\"\n\") | .[1:] | map(select(length > 0) | split(\",\") | {url: .[0], params: .[1]}))'"
+csv_to_json_batch() {
+  # Default values
+  local size=50   # Default batch size
+  local index=0   # Default index (first batch)
+  local input_file=""
+
+  # Parse options using zsh's getopts
+  while getopts "s:i:f:" opt; do
+    case $opt in
+      s) size=$OPTARG ;;  # Set batch size
+      i) index=$OPTARG ;;  # Set batch index
+      f) input_file=$OPTARG ;;  # Input CSV file
+      *) echo "Usage: $0 [-s size] [-i index] [-f input_file]"  # Handle invalid options
+         return 1 ;;
+    esac
+  done
+
+  # Check if input file is provided and exists
+  if [[ -z "$input_file" ]]; then
+    echo "Error: No input file provided"
+    return 1
+  fi
+
+  if [[ ! -f "$input_file" ]]; then
+    echo "Error: File '$input_file' not found"
+    return 1
+  fi
+
+  # Convert CSV to JSON and slice it into batches
+  jq -Rsn "
+    (input | split(\"\n\") | .[1:] | map(select(length > 0) | split(\",\") | {url: .[0], params: .[1]}))
+    | .[$((index * size)):$((index * size + size))]" "$input_file"
+}
 # safe gards to not break gloabal python installation
 function cd() {
     builtin cd "$@"  # Call the built-in cd command
@@ -125,17 +160,9 @@ scrapy_fzf_insert() {
     zle redisplay
 }
 
-# Define the widget and bind it to Ctrl+g
+# Define the widget and bind it to Ctrl+f
 zle -N scrapy_fzf_insert
 bindkey '^f' scrapy_fzf_insert
-# loading zsh custom completions 
-# fpath=(~/.zsh/completions $fpath)
-# autoload -Uz compinit
-# compinit
-# autoload -U +X compinit && compinit
-# . <( zellij setup --generate-completion zsh | sed -Ee 's/^(_(zellij) ).*/compdef \1\2/' )
-  # [[ -f "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh" ]] && source "${ZDOTDIR:-$HOME}/cheat-fzf/cht-fzf.sh"
-# eval "$(zellij setup --generate-auto-start zsh)"
 # Install Ruby Gems to ~/gems
 export PATH="$HOME/.rbenv/bin:$PATH"
 _evalcache rbenv init -
