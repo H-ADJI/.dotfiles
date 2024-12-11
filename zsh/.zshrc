@@ -41,40 +41,7 @@ alias cpc="xclip -sel c"
 alias list_devices="ls /home/khalil/.android/avd"
 alias launch_device='/home/khalil/Android/Sdk/emulator/emulator -avd Pixel_XL_API_31 -writable-system '
 alias androidStudio="/home/khalil/android-studio/bin/studio.sh"
-alias csv_to_json="jq -Rsn '(input | split(\"\n\") | .[1:] | map(select(length > 0) | split(\",\") | {url: .[0], params: .[1]}))'"
-csv_to_json_batch() {
-  # Default values
-  local size=50   # Default batch size
-  local index=0   # Default index (first batch)
-  local input_file=""
-
-  # Parse options using zsh's getopts
-  while getopts "s:i:f:" opt; do
-    case $opt in
-      s) size=$OPTARG ;;  # Set batch size
-      i) index=$OPTARG ;;  # Set batch index
-      f) input_file=$OPTARG ;;  # Input CSV file
-      *) echo "Usage: $0 [-s size] [-i index] [-f input_file]"  # Handle invalid options
-         return 1 ;;
-    esac
-  done
-
-  # Check if input file is provided and exists
-  if [[ -z "$input_file" ]]; then
-    echo "Error: No input file provided"
-    return 1
-  fi
-
-  if [[ ! -f "$input_file" ]]; then
-    echo "Error: File '$input_file' not found"
-    return 1
-  fi
-
-  # Convert CSV to JSON and slice it into batches
-  jq -Rsn "
-    (input | split(\"\n\") | .[1:] | map(select(length > 0) | split(\",\") | {url: .[0], params: .[1]}))
-    | .[$((index * size)):$((index * size + size))]" "$input_file"
-}
+alias csv_to_json="jq -Rsn '(input | split(\"\n\") | .[1:] | map(select(length > 0) | split(\",\") | {url: .[0], params: .[1]}))' > paths.json"
 # safe gards to not break gloabal python installation
 function cd() {
     builtin cd "$@"  # Call the built-in cd command
@@ -159,7 +126,6 @@ scrapy_fzf_insert() {
     fi
     zle redisplay
 }
-
 # Define the widget and bind it to Ctrl+f
 zle -N scrapy_fzf_insert
 bindkey '^f' scrapy_fzf_insert
