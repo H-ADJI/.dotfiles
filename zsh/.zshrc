@@ -41,7 +41,7 @@ alias cpc="xclip -sel c"
 alias list_devices="ls /home/khalil/.android/avd"
 alias launch_device='/home/khalil/Android/Sdk/emulator/emulator -avd Pixel_XL_API_31 -writable-system '
 alias androidStudio="/home/khalil/android-studio/bin/studio.sh"
-alias csv_to_json="jq -Rsn '(input | split(\"\n\") | .[1:] | map(select(length > 0) | split(\",\") | {url: .[0], params: .[1]}))' > paths.json"
+alias csv_to_json="jq -Rsn '(input | split(\"\n\") | .[1:] | map(select(length > 0) | split(\",\") | {url: .[0], path: .[1], params: null}))' > paths.json"
 # safe gards to not break gloabal python installation
 function cd() {
     builtin cd "$@"  # Call the built-in cd command
