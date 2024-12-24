@@ -22,6 +22,7 @@ PATH=$PATH:/usr/local/go/bin
 PATH=$PATH:~/apps
 PATH=$PATH:~/go/bin
 PATH=$PATH:~/.cargo/bin
+PATH=$PATH:~/.tmux/plugins/tmuxifier/bin/
 # aliases
 alias zshconfig="nv ~/.zshrc"
 alias tmuxconfig="nv ~/.tmux.conf"
@@ -129,9 +130,6 @@ scrapy_fzf_insert() {
 # Define the widget and bind it to Ctrl+f
 zle -N scrapy_fzf_insert
 bindkey '^f' scrapy_fzf_insert
-# Install Ruby Gems to ~/gems
-export PATH="$HOME/.rbenv/bin:$PATH"
-_evalcache rbenv init -
 _evalcache direnv hook zsh
 eval "$(tmuxifier init -)"
 # zprof
