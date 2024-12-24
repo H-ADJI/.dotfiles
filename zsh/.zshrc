@@ -1,6 +1,6 @@
 # zmodload zsh/zprof
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="agnoster"
+ZSH_THEME="afowler"
 zstyle ':omz:update' mode auto      # update automatically without asking
 # You can also set it to another string to have that shown instead of the default red dots.
 COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
@@ -43,6 +43,7 @@ alias list_devices="ls /home/khalil/.android/avd"
 alias launch_device='/home/khalil/Android/Sdk/emulator/emulator -avd Pixel_XL_API_31 -writable-system '
 alias androidStudio="/home/khalil/android-studio/bin/studio.sh"
 alias csv_to_json="jq -Rsn '(input | split(\"\n\") | .[1:] | map(select(length > 0) | split(\",\") | {url: .[0], path: .[1], params: null}))' > paths.json"
+alias blockify="LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"
 # safe gards to not break gloabal python installation
 function cd() {
     builtin cd "$@"  # Call the built-in cd command
