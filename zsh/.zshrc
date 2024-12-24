@@ -1,6 +1,6 @@
 # zmodload zsh/zprof
 export ZSH="$HOME/.oh-my-zsh"
-ZSH_THEME="afowler"
+ZSH_THEME="arrow"
 zstyle ':omz:update' mode auto      # update automatically without asking
 # You can also set it to another string to have that shown instead of the default red dots.
 COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
