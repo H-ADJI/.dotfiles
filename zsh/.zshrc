@@ -6,7 +6,7 @@ zstyle ':omz:update' mode auto      # update automatically without asking
 COMPLETION_WAITING_DOTS="%F{yellow}waiting...%f"
 # Caution: this setting can cause issues with multiline prompts in zsh < 5.7.1 (see #5765)
 COMPLETION_WAITING_DOTS="true"
-plugins=(evalcache tmux git npm docker docker-compose)
+plugins=(evalcache git npm docker docker-compose)
 ZSH_TMUX_AUTOQUIT=false
 ZSH_TMUX_DEFAULT_SESSION_NAME="default session"
 # testing if i can  remember using only one term window :s
@@ -139,3 +139,10 @@ bindkey '^f' scrapy_fzf_insert
 _evalcache direnv hook zsh
 eval "$(tmuxifier init -)"
 # zprof
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc
+
+
+export PATH=$PATH:/home/khalil/.spicetify
