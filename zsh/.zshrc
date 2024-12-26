@@ -9,6 +9,8 @@ COMPLETION_WAITING_DOTS="true"
 plugins=(evalcache tmux git npm docker docker-compose)
 ZSH_TMUX_AUTOQUIT=false
 ZSH_TMUX_DEFAULT_SESSION_NAME="default session"
+# testing if i can  remember using only one term window :s
+# ZSH_TMUX_AUTOCONNECT=false
 ZSH_TMUX_AUTOSTART=true
 source $ZSH/oh-my-zsh.sh
 export EDITOR="/home/khalil/apps/nvim"
