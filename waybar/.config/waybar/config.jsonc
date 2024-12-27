@@ -1,0 +1,37 @@
+{
+  "position": "top",
+  "modules-left": ["sway/workspaces"],
+  "modules-right": ["network", "pulseaudio", "clock"],
+  // Modules configuration
+  "sway/workspaces": {
+    "disable-scroll": true,
+    "all-outputs": true,
+    "format": "{icon}",
+    "format-icons": {
+      "default": "",
+      "urgent": "",
+      "focused": ""
+    }
+  },
+  "network": {
+    "format-wifi": "<span size='13000' foreground='#F2CECF'> </span>{essid}",
+    "format-ethernet": "<span size='13000' foreground='#F2CECF'>󰤭</span> Disconnected",
+    "format-linked": "{ifname} (No IP) ",
+    "format-disconnected": "<span size='13000' foreground='#F2CECF'> </span>Disconnected",
+    "tooltip-format-wifi": "Signal Strenght: {signalStrength}%"
+  },
+  "pulseaudio": {
+    "on-click": "pactl set-sink-mute @DEFAULT_SINK@ toggle",
+    "format": "<span size='13000' foreground='#EBDDAA'>{icon}</span> {volume}%",
+    "format-muted": "<span size='14000' foreground='#EBDDAA'></span> Muted",
+    "format-icons": {
+      "headphone": "",
+      "hands-free": "",
+      "headset": "",
+      "phone": "",
+      "portable": "",
+      "car": "",
+      "default": ["", ""]
+    }
+  }
+}
