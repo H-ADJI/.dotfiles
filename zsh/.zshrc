@@ -43,6 +43,7 @@ alias launch_device='/home/khalil/Android/Sdk/emulator/emulator -avd Pixel_XL_AP
 alias androidStudio="/home/khalil/android-studio/bin/studio.sh"
 alias csv_to_json="jq -Rsn '(input | split(\"\n\") | .[1:] | map(select(length > 0) | split(\",\") | {url: .[0], path: .[1], params: null}))' > paths.json"
 alias blockify="LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify"
+alias dots="cd ~/.dotfiles/"
 # safe gards to not break gloabal python installation
 function cd() {
     builtin cd "$@"  # Call the built-in cd command
