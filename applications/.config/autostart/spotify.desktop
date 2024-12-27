@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Exec=LD_PRELOAD=/usr/local/lib/spotify-adblock.so spotify
+Exec=/home/khalil/apps/spicetify-launcher
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
