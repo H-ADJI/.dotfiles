@@ -1,0 +1,10 @@
+- name: Installing apps from the public Deb repo
+  hosts: localhost
+  tasks:
+    - name: Install utilities using Nala
+      ansible.builtin.command:
+        cmd: "cargo install  {{ item }}"
+      loop:
+        - jnv
+        - yazi-fm
+        - yazi-cli

@@ -1,0 +1,93 @@
+- name: Install Kitty terminal
+  become: true
+  become_user: "{{ user }}"
+  hosts: localhost
+  tasks:
+    - name: Install Kitty using curl
+      ansible.builtin.shell: |
+        curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+      args:
+        creates: "{{ home_dir }}/.local/kitty.app/bin/kitty" # Ensure Kitty binary is installed
+    - name: Move folder from /root/.local to the target user's .local
+      ansible.builtin.command:
+        cmd: "mv /root/.local/kitty.app {{ home_dir }}/.local"
+    - name: Set proper ownership
+      ansible.builtin.file:
+        path: "{{ home_dir }}/.local/kitty.app"
+        owner: "khalil"
+        group: "khalil"
+        recurse: yes
+    - name: Create a symlink for Kitty in ~/.local/bin
+      ansible.builtin.file:
+        src: "{{ home_dir }}/.local/kitty.app/bin/kitty"
+        dest: "/usr/local/bin/kitty"
+        state: link
+    - name: Create symlink for the 'kitten' binary in /usr/local/bin
+      ansible.builtin.file:
+        src: "{{ home_dir }}/.local/kitty.app/bin/kitten"
+        dest: "/usr/local/bin/kitten"
+        state: link
+
+- name: Set up zsh as default shell and install Oh My Zsh
+  hosts: localhost
+  become: True
+  become_user: "{{ user }}"
+  tasks:
+    - name: Install zsh
+      ansible.builtin.package:
+        name: zsh
+        state: present
+
+    - name: Check if zsh is already the default shell
+      ansible.builtin.shell: echo $SHELL
+      register: current_shell
+
+    - name: Change default shell to zsh
+      ansible.builtin.command:
+        cmd: chsh -s /bin/zsh {{ user }}
+      when: current_shell.stdout != "/bin/zsh"
+
+    - name: Install Oh My Zsh
+      ansible.builtin.shell: |
+        sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+      args:
+        executable: /bin/bash
+    - name: Remove .zshrc
+      ansible.builtin.file:
+        path: "{{ home_dir }}/.zshrc"
+        state: absent
+
+- name: Install Tmux Plugin Manager (TPM)
+  hosts: localhost
+  become_user: "{{ user }}"
+  become: True
+  tasks:
+    - name: Ensure ~/.tmux/plugins directory exists
+      file:
+        path: "{{ ansible_env.HOME }}/.tmux/plugins"
+        state: directory
+        mode: "0755"
+
+    - name: Clone the TPM repository
+      git:
+        repo: "https://github.com/tmux-plugins/tpm"
+        dest: "{{ home_dir }}/.tmux/plugins/tpm"
+
+- name: Install Evalcache Zsh Plugin
+  hosts: localhost
+  become_user: "{{ user }}"
+  become: True
+  vars:
+    zsh_custom_path: "{{ home_dir }}/.oh-my-zsh/custom"
+  tasks:
+    - name: Ensure Zsh custom plugins directory exists
+      file:
+        path: "{{ zsh_custom_path }}/plugins"
+        state: directory
+        mode: "0755"
+    - name: Clone the Evalcache repository
+      git:
+        repo: "https://github.com/mroth/evalcache"
+        dest: "{{ zsh_custom_path }}/plugins/evalcache"
+        update: no # Skip pulling if it already exists
+

@@ -1,0 +1,102 @@
+- name: Install JetBrains Mono Nerd Font for user
+  hosts: localhost
+  become: true
+  become_user: "{{ user }}"
+  tasks:
+    - name: Create the fonts directory in the user's home directory
+      ansible.builtin.file:
+        path: "{{ home_dir }}/.local/share/fonts/jetbrains-mono-nerd-font"
+        state: directory
+        mode: "0755"
+
+    - name: Download the JetBrains Mono Nerd Font tarball
+      ansible.builtin.get_url:
+        url: "https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/JetBrainsMono.zip"
+        dest: "/tmp/JetBrainsMono.zip"
+
+    - name: Unzip the JetBrains Mono Nerd Font tarball
+      ansible.builtin.unarchive:
+        src: "/tmp/JetBrainsMono.zip"
+        dest: "{{ home_dir }}/.local/share/fonts/jetbrains-mono-nerd-font"
+        creates: "{{ home_dir }}/.local/share/fonts/jetbrains-mono-nerd-font/JetBrainsMono-Regular.ttf"
+
+    - name: Update the font cache for the user
+      ansible.builtin.command:
+        cmd: "fc-cache -f -v"
+        creates: "{{ home_dir }}/.cache/fontconfig"
+- name: Automate SSH Key Setup and Clone Private Dotfiles Repo
+  hosts: localhost
+  become: true
+  become_user: "{{ user }}"
+  vars:
+    ssh_key_dir: "{{ home_dir }}/.ssh"
+    ssh_key_name: "khalil-default"
+    git_repo_url: https://github.com/H-ADJI/.dotfiles
+    git_repo_dir: "{{ home_dir }}/.dotfiles"
+    email: h-adji_tech@proton.me
+  tasks:
+    - name: Check if SSH key exists
+      stat:
+        path: "{{ ssh_key_dir }}/{{ ssh_key_name }}"
+      register: ssh_key_exists
+
+    - name: Generate SSH key pair if not present
+      ansible.builtin.openssh_keypair:
+        path: "{{ ssh_key_dir }}/{{ ssh_key_name }}"
+        force: false # Only generate if the key doesn't already exist
+        comment: "{{ email }}"
+      when: not ssh_key_exists.stat.exists
+
+    - name: Ensure SSH directory has correct permissions
+      ansible.builtin.file:
+        path: "{{ ssh_key_dir }}"
+        state: directory
+        mode: "0700"
+
+    - name: Ensure SSH private key has correct permissions
+      ansible.builtin.file:
+        path: "{{ ssh_key_dir }}/{{ ssh_key_name }}"
+        state: file
+        mode: "0600"
+
+    - name: Ensure SSH public key has correct permissions
+      ansible.builtin.file:
+        path: "{{ ssh_key_dir }}/{{ ssh_key_name }}.pub"
+        state: file
+        mode: "0644"
+
+    - name: Setting SSH public key for GitHub/GitLab
+      ansible.builtin.debug:
+        msg: "Please use SSH public key in the clipboard for GitHub/GitLab account: "
+
+    - name: Clone the dotfiles repository
+      ansible.builtin.git:
+        repo: "{{ git_repo_url }}"
+        dest: "{{ git_repo_dir }}"
+        clone: yes
+
+    - name: Apply GNU Stow to all subdirectories in the dotfiles repo
+      ansible.builtin.shell: |
+        for dir in {{ git_repo_dir }}/*; do
+          if [ -d "$dir" ]; then
+            stow -d {{ git_repo_dir }} -t {{ home_dir }} "$(basename "$dir")"
+          fi
+        done
+      args:
+        executable: /bin/bash
+- name: Set kitty as the default terminal
+  hosts: all
+  become: true
+  become_user: "{{ user }}"
+  tasks:
+    - name: Check if kitty is installed
+      command: which kitty
+      register: kitty_check
+      failed_when: kitty_check.rc != 0
+      changed_when: false
+    - name: Add kitty to terminals list
+      command: update-alternatives --install /usr/bin/x-terminal-emulator x-terminal-emulator /usr/local/bin/kitty 200
+      when: kitty_check.rc == 0
+    - name: Configure kitty as the default terminal emulator
+      command: update-alternatives --set x-terminal-emulator /usr/local/bin/kitty
+      when: kitty_check.rc == 0

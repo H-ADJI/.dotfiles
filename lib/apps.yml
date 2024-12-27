@@ -1,0 +1,11 @@
+- name: Include [DEB] apps
+  import_playbook: apps/deb.yml
+
+- name: Include [PRE-Compiled] apps
+  import_playbook: apps/pre_compiled.yml
+
+- name: Include [OTHER] apps
+  import_playbook: apps/other.yml
+
+- name: Include [CARGO] apps
+  import_playbook: apps/cargo.yml

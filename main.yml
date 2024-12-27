@@ -1,0 +1,22 @@
+- name: Main playbook to configure workstation
+  hosts: localhost
+  gather_facts: false
+  vars:
+  tasks:
+    - name: Print a greeting message and countdown
+      ansible.builtin.debug:
+        msg: |
+          "Hello! Configuration and installation on this desktop is starting ..."
+    - name: Set global home directory
+      ansible.builtin.set_fact:
+        home_dir: "/home/khalil"
+        user: "khalil"
+
+- name: Include basic utilities
+  import_playbook: lib/pre_req.yml
+
+- name: Include apps installation
+  import_playbook: lib/apps.yml
+
+- name: Include configuration setup
+  import_playbook: lib/config.yml

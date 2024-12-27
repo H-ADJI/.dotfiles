@@ -1,0 +1,87 @@
+- name: Extract binaries from multiple tar.gz files and create symlinks
+  hosts: localhost
+  become: true
+  become_user: "{{ user }}"
+  vars:
+    apps_dir: "{{ home_dir }}/apps"
+    binaries:
+      - name: "firefox"
+        url: https://download.mozilla.org/?product=firefox-latest-ssl&os=linux64&lang=en-US
+        binaries_to_symlink:
+          - "firefox/firefox"
+
+      - name: "fzf"
+        url: https://github.com/junegunn/fzf/releases/download/v0.57.0/fzf-0.57.0-linux_amd64.tar.gz
+
+      - name: "yazi"
+        url: https://github.com/sxyazi/yazi/releases/download/v0.4.2/yazi-x86_64-unknown-linux-gnu.zip
+        binaries_to_symlink:
+          - "node/bin/ya"
+          - "node/bin/yazi"
+
+      - name: "jnv"
+        url: https://github.com/ynqa/jnv/releases/download/v0.4.2/jnv-x86_64-unknown-linux-gnu.tar.xz
+
+      - name: nvim
+        url: https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+        binaries_to_symlink:
+          - "nvim/bin/nvim"
+
+      - name: "go"
+        url: https://go.dev/dl/go1.23.4.linux-amd64.tar.gz
+        binaries_to_symlink:
+          - "go/bin/go"
+
+      - name: "nodejs"
+        url: https://nodejs.org/dist/v22.12.0/node-v22.12.0-linux-x64.tar.xz
+        binaries_to_symlink:
+          - "node/bin/npm"
+          - "node/bin/npx"
+          - "node/bin/node"
+
+  tasks:
+    - name: Create the apps directory if it does not exist {{ apps_dir }}
+      ansible.builtin.file:
+        path: "{{ apps_dir }}"
+        state: directory
+        group: khalil
+        owner: khalil
+        mode: "0755"
+
+    - name: Download the tar.gz file
+      ansible.builtin.get_url:
+        url: "{{ item.url }}"
+        dest: "/tmp/{{ item.name }}.tar.gz"
+      loop: "{{ binaries }}"
+
+    - name: Extract the binary from the tar.gz file
+      ansible.builtin.unarchive:
+        src: "/tmp/{{ item.name }}.tar.gz"
+        dest: "{{ apps_dir }}"
+        creates: "{{ apps_dir }}/{{ item.name }}"
+      loop: "{{ binaries }}"
+
+    - name: Rename directories inside a specific folder
+      ansible.builtin.shell: |
+        for dir in {{ apps_dir }}/*-*/; do
+          # Extract the first part of the folder name before the dash
+          new_name=$(echo "$dir" | sed 's/-.*//')
+          # Rename the folder
+          mv "$dir" "$new_name"
+        done
+      args:
+        executable: /bin/bash
+    # - name: Change owner and group for files in ~/apps
+    #   ansible.builtin.file:
+    #     path: "{{ home_dir }}/apps"
+    #     owner: "khalil"
+    #     group: "khalil"
+    #     recurse: yes
+    - include_tasks: binaries_symlink.yml
+      loop: "{{ binaries }}"
+
+    - name: Clean up the downloaded tar.gz file
+      ansible.builtin.file:
+        path: "/tmp/{{ item.name }}.tar.gz"
+        state: absent
+      loop: "{{ binaries }}"

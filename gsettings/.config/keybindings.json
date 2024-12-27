@@ -1,0 +1,12 @@
+[
+  {
+    "name": "Open Calculator",
+    "command": "gnome-calculator",
+    "binding": "<Super>c"
+  },
+  {
+    "name": "Open Firefox",
+    "command": "firefox",
+    "binding": "<Super>f"
+  }
+]

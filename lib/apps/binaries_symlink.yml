@@ -1,0 +1,8 @@
+- name: Create a symlink for the binary in /usr/local/bin
+  ansible.builtin.file:
+    src: "{{ apps_dir }}/{{ binary }}"
+    dest: "/usr/local/bin/{{ binary | basename }}"
+    state: link
+  loop: "{{ item.binaries_to_symlink | default([item.name]) }}" # Default to the 'name' if no 'binaries_to_symlink'
+  loop_control:
+    loop_var: binary
