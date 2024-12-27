@@ -4,5 +4,5 @@ Exec=kitty -e btm
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name=Application Name
-Comment=Description
+Name=bottom
+Comment=bottom system ressources monitoring TUI

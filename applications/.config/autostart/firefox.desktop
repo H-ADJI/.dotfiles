@@ -4,5 +4,5 @@ Exec=firefox
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name=Application Name
-Comment=Description
+Name=firefox
+Comment=favorite browser
