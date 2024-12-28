@@ -110,13 +110,13 @@ elif [[ "$1" == "apply_all" ]]; then
     exit 1
   fi
   reset_keybindings
-  total_items=$(jq length keybindings.json) # Get the length of the JSON array
+  total_items=$(jq length $json_file) # Get the length of the JSON array
 
   for i in $(seq 0 $((total_items - 1))); do
     # Extract the element at index i
-    name=$(jq -r ".[$i].name" keybindings.json)
-    command=$(jq -r ".[$i].command" keybindings.json)
-    binding=$(jq -r ".[$i].binding" keybindings.json)
+    name=$(jq -r ".[$i].name" $json_file)
+    command=$(jq -r ".[$i].command" $json_file)
+    binding=$(jq -r ".[$i].binding" $json_file)
 
     # Call the add_keybinding function with arguments extracted from the JSON
     add_keybinding "$(echo $name | tr ' ' '_')" "$name" "$command" "$binding"
@@ -124,18 +124,22 @@ elif [[ "$1" == "apply_all" ]]; then
 
   echo "All keybindings applied from keybindings.json"
 else
-  echo "Usage: $0 <reset|add|list|apply_all>"
-  echo "To reset all custom keybindings: $0 reset"
-  echo "To add a new keybinding: $0 add <binding_name> <keybinding_name> <command> <binding>"
-  echo "To list all current keybindings: $0 list"
-  echo "To apply all keybindings from JSON file: $0 apply_all"
-  exit 1
-  fielse
-  echo "Usage: $0 <reset|add|list|list-keyboard> [parameters]"
-  echo "To reset all custom keybindings: $0 reset"
-  echo "To add a new keybinding: $0 add <binding_name> <keybinding_name> <command> <binding>"
-  echo "To list all current keybindings: $0 list"
-  echo "To list available keyboard keys: $0 list-keyboard"
-  echo "Example: $0 add custom2 'Open Calculator' 'gnome-calculator' '<Super>c'"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "Usage: set-binding <reset|add|list|apply_all>"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "To reset all custom keybindings: set-binding reset"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "To add a new keybinding: set-binding add <binding_name> <keybinding_name> <command> <binding>"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "To list all current keybindings: set-binding list"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "To apply all keybindings from JSON file: set-binding apply_all"
+  echo "---------------------------------------------------------------------------------------------"
+  echo "---------------------------------------------------------------------------------------------"
   exit 1
 fi
