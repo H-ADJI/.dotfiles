@@ -11,12 +11,12 @@
     - name: Create a symlink for Kitty in ~/.local/bin
       ansible.builtin.file:
         src: "{{ home_dir }}/.local/kitty.app/bin/kitty"
-        dest: "/usr/local/bin/kitty"
+        dest: "{{ home_dir }}/.local/bin/kitty"
         state: link
-    - name: Create symlink for the 'kitten' binary in /usr/local/bin
+    - name: Create symlink for the 'kitten' in ~/.local/bin
       ansible.builtin.file:
         src: "{{ home_dir }}/.local/kitty.app/bin/kitten"
-        dest: "/usr/local/bin/kitten"
+        dest: "{{ home_dir }}/.local/bin/kitten"
         state: link
 
 - name: Set up zsh as default shell and install Oh My Zsh
