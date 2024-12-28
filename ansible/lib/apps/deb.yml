@@ -63,7 +63,7 @@
 - name: Download and install multiple .deb packages using Nala
   hosts: localhost
   become: true
-  become_user: "{{ user }}"
+  # become_user: "{{ user }}"
   vars:
     deb_packages:
       - {
