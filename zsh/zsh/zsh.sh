@@ -12,5 +12,3 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 # nala completion
 fpath+=~/.zfunc
-
-
