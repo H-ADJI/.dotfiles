@@ -18,7 +18,7 @@ fi
 git clone --depth=1 "$GIT_REPO_URL" "$LOCAL_REPO_DIR"
 
 # Run the Ansible playbook
-ANSIBLE_PLAYBOOK="$LOCAL_REPO_DIR/main.yml"
+ANSIBLE_PLAYBOOK="$LOCAL_REPO_DIR/ansible/main.yml"
 echo "Running the Ansible playbook..."
 if [ -f "$ANSIBLE_PLAYBOOK" ]; then
   ansible-playbook "$ANSIBLE_PLAYBOOK"
