@@ -16,8 +16,8 @@
       - name: "yazi"
         url: https://github.com/sxyazi/yazi/releases/download/v0.4.2/yazi-x86_64-unknown-linux-gnu.zip
         binaries_to_symlink:
-          - "yazi/ya"
-          - "yazi/yazi"
+          - "ya"
+          - "yazi"
 
       - name: "jnv"
         url: https://github.com/ynqa/jnv/releases/download/v0.4.2/jnv-x86_64-unknown-linux-gnu.tar.xz

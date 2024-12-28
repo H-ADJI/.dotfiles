@@ -19,7 +19,6 @@
       loop:
         - alacritty
         - applications
-        - assets
         - direnv
         - firefox
         - git
