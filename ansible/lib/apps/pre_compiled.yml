@@ -47,7 +47,13 @@
         group: khalil
         owner: khalil
         mode: "0755"
-
+    - name: Create .local/bin
+      ansible.builtin.file:
+        path: "{{ home_dir }}/.local/bin"
+        state: directory
+        group: khalil
+        owner: khalil
+        mode: "0755"
     - name: Download the tar.gz file
       ansible.builtin.get_url:
         url: "{{ item.url }}"
