@@ -19,10 +19,9 @@
         dest: "{{ home_dir }}/.local/bin/kitten"
         state: link
 
-- name: Set up zsh as default shell and install Oh My Zsh
+- name: install ZSH
   hosts: localhost
   become: True
-  become_user: "{{ user }}"
   tasks:
     - name: Install zsh
       ansible.builtin.package:
@@ -35,6 +34,12 @@
       ansible.builtin.command:
         cmd: chsh -s /bin/zsh {{ user }}
       when: current_shell.stdout != "/bin/zsh"
+
+- name: install OMZSH
+  hosts: localhost
+  become: True
+  become_user: "{{ user }}"
+  tasks:
     - name: Install Oh My Zsh
       ansible.builtin.shell: |
         sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
