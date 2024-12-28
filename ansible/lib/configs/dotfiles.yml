@@ -12,16 +12,20 @@
         dest: "{{ git_repo_dir }}"
         clone: yes
 
-    - name: Define the list of folders to stow
-      set_fact:
-        folders:
-          - nvim
-          - zsh
-          - git
-          - tmux
-
     - name: Apply stow to each folder
       ansible.builtin.command:
         cmd: stow -v -t ~ "{{ item }}"
         chdir: "{{ home_dir }}/.dotfiles"
-      loop: "{{ folders }}"
+      loop:
+        - alacritty
+        - applications
+        - assets
+        - direnv
+        - firefox
+        - git
+        - gsettings
+        - kitty
+        - nvim
+        - scripts
+        - tmux
+        - zsh
