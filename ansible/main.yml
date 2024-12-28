@@ -18,5 +18,5 @@
 - name: Include apps installation
   import_playbook: lib/apps.yml
 
-# - name: Include configuration setup
-#   import_playbook: lib/config.yml
+- name: Include configuration setup
+  import_playbook: lib/config.yml
