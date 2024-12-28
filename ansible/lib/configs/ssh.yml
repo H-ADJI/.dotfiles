@@ -18,25 +18,3 @@
         force: false # Only generate if the key doesn't already exist
         comment: "{{ email }}"
       when: not ssh_key_exists.stat.exists
-
-    - name: Ensure SSH directory has correct permissions
-      ansible.builtin.file:
-        path: "{{ ssh_key_dir }}"
-        state: directory
-        mode: "0700"
-
-    - name: Ensure SSH private key has correct permissions
-      ansible.builtin.file:
-        path: "{{ ssh_key_dir }}/{{ ssh_key_name }}"
-        state: file
-        mode: "0600"
-
-    - name: Ensure SSH public key has correct permissions
-      ansible.builtin.file:
-        path: "{{ ssh_key_dir }}/{{ ssh_key_name }}.pub"
-        state: file
-        mode: "0644"
-
-    - name: Setting SSH public key for GitHub/GitLab
-      ansible.builtin.debug:
-        msg: "Please use SSH public key in the clipboard for GitHub/GitLab account: "

@@ -12,12 +12,16 @@
         dest: "{{ git_repo_dir }}"
         clone: yes
 
-    - name: Apply GNU Stow to all subdirectories in the dotfiles repo
-      ansible.builtin.shell: |
-        for dir in {{ git_repo_dir }}/*; do
-          if [ -d "$dir" ]; then
-            stow -d {{ git_repo_dir }} -t {{ home_dir }} "$(basename "$dir")"
-          fi
-        done
-      args:
-        executable: /bin/bash
+    - name: Define the list of folders to stow
+      set_fact:
+        folders:
+          - nvim
+          - zsh
+          - git
+          - tmux
+
+    - name: Apply stow to each folder
+      ansible.builtin.command:
+        cmd: stow -v -t ~ "{{ item }}"
+        chdir: "{{ home_dir }}/.dotfiles"
+      loop: "{{ folders }}"
