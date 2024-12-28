@@ -38,8 +38,6 @@
         - wl-clipboard
         - btm
         - git
-        - wofi
-        - waybar
         - sed
         - unzip
         - adb
@@ -47,7 +45,6 @@
         - tmux
         - htop
         - tree
-        - vlc
         - zsh
         - jq
         - build-essential
@@ -61,7 +58,6 @@
         - ranger
         - eza
         - bat
-        - sway
         - python312-venv
 
 - name: Download and install multiple .deb packages using Nala

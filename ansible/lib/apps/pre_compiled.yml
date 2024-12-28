@@ -71,15 +71,8 @@
         done
       args:
         executable: /bin/bash
-    # - name: Change owner and group for files in ~/apps
-    #   ansible.builtin.file:
-    #     path: "{{ home_dir }}/apps"
-    #     owner: "khalil"
-    #     group: "khalil"
-    #     recurse: yes
     - include_tasks: binaries_symlink.yml
       loop: "{{ binaries }}"
-
     - name: Clean up the downloaded tar.gz file
       ansible.builtin.file:
         path: "/tmp/{{ item.name }}.tar.gz"

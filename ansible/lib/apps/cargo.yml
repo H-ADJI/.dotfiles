@@ -1,4 +1,4 @@
-- name: Installing apps from the public Deb repo
+- name: Installing apps using cargo
   hosts: localhost
   tasks:
     - name: Install utilities using Nala
