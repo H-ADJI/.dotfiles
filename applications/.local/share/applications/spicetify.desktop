@@ -1,11 +1,9 @@
 [Desktop Entry]
-Type=Application
 Name=Spicetify
-GenericName=Music Player
+Comment=cutsom spotify client
+Exec=/home/khalil/apps/spicetify-launcher %u
 Icon=/home/khalil/.dotfiles/assets/spicetify.png
-TryExec=/home/khalil/apps/spicetify-launcher 
-Exec=/home/khalil/apps/spicetify-launcher %U
 Terminal=false
-MimeType=x-scheme-handler/spotify;
+Type=Application
 Categories=Audio;Music;Player;AudioVideo;
 StartupWMClass=spicetify

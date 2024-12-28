@@ -1,9 +1,9 @@
 [Desktop Entry]
-Name=Firefox
+Name=Firefox Browser
 Comment=Web Browser
 Exec=/home/khalil/apps/firefox/firefox %u
 Icon=/home/khalil/apps/firefox/browser/chrome/icons/default/default128.png
 Terminal=false
 Type=Application
 Categories=Network;WebBrowser;
-StartupWMClass=Firefox
+StartupWMClass=Firefox BB
