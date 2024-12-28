@@ -108,7 +108,7 @@
 - name: Install Python 3.10 from private apt repo
   hosts: localhost
   become: true
-  become_user: "{{ user }}"
+  # become_user: "{{ user }}"
   tasks:
     - name: Add the deadsnakes PPA for Python 3.10 (Ubuntu-specific)
       ansible.builtin.apt_repository:
@@ -135,7 +135,7 @@
 - name: Install Spotify
   hosts: localhost
   become: true
-  become_user: "{{ user }}"
+  # become_user: "{{ user }}"
   tasks:
     - name: Download and add Spotify GPG key
       ansible.builtin.shell: |
