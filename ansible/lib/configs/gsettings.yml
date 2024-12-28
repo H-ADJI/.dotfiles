@@ -1,1 +1,11 @@
-#  gsettings set org.gnome.desktop.background picture-uri-dark "file:///home/khalil/.dotfiles/black-hole.png"
+- name: gsettings
+  hosts: localhost
+  become: true
+  become_user: "{{ user }}"
+  tasks:
+    - name: set gnome background image
+      ansible.builtin.command:
+        cmd: gsettings set org.gnome.desktop.background picture-uri-dark "file://{{ home_dir }}/.dotfiles/black-hole.png"
+    - name: set keybinds
+      ansible.builtin.command:
+        cmd: set-binding apply_all

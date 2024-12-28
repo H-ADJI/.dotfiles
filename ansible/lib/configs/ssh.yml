@@ -15,6 +15,6 @@
     - name: Generate SSH key pair if not present
       ansible.builtin.openssh_keypair:
         path: "{{ ssh_key_dir }}/{{ ssh_key_name }}"
-        force: false # Only generate if the key doesn't already exist
+        force: false
         comment: "{{ email }}"
       when: not ssh_key_exists.stat.exists
