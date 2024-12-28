@@ -58,7 +58,7 @@
         - ranger
         - eza
         - bat
-        - python312-venv
+        - python3.12-venv
 
 - name: Download and install multiple .deb packages using Nala
   hosts: localhost
