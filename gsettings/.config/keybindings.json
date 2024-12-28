@@ -1,12 +1,47 @@
 [
   {
-    "name": "Open Calculator",
-    "command": "gnome-calculator",
-    "binding": "<Super>c"
+    "name": "Open Settings",
+    "command": "gnome-control-center",
+    "binding": "<Super>s"
+  },
+  {
+    "name": "Open Kitty Terminal",
+    "command": "kitty",
+    "binding": "<Super>Return"
+  },
+  {
+    "name": "Open Kitty with tmux",
+    "command": "kitty -e tmux",
+    "binding": "<Super>t"
+  },
+  {
+    "name": "Open File manager",
+    "command": "nautilus",
+    "binding": "<Super>f"
+  },
+  {
+    "name": "spicetify",
+    "command": "/home/khalil/apps/spicetify-launcher",
+    "binding": "<Super>x"
+  },
+  {
+    "name": "Connect logitech speaker",
+    "command": "/home/khalil/apps/bspeaker",
+    "binding": "<Shift><Super>equal"
+  },
+  {
+    "name": "Disconnect logitech speaker",
+    "command": "/home/khalil/apps/disconnect_blth",
+    "binding": "<Super>minus"
   },
   {
     "name": "Open Firefox",
     "command": "firefox",
-    "binding": "<Super>f"
+    "binding": "<Super>b"
+  },
+  {
+    "name": "system-ressource-monitoring",
+    "command": "kitty -e btm",
+    "binding": "<Ctrl><Alt>b"
   }
 ]
