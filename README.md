@@ -12,4 +12,5 @@ my ansible playbooks to setup my personal workstations
 
 ## TODO
 
-- spotify-adblock ( + spotify)
+- launcher script to automate everything
+  - a script to curl on a clean install machine
