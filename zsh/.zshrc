@@ -7,3 +7,4 @@ source ~/zsh/custom_addons.sh
 source ~/zsh/fzf.sh
 source ~/zsh/scrapy.sh
 source ~/zsh/tmux.sh
+source ~/zsh/zoxide.sh
