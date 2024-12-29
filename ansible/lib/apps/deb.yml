@@ -76,6 +76,10 @@
           url: https://github.com/dandavison/delta/releases/download/0.18.2/git-delta-musl_0.18.2_amd64.deb,
         }
       - {
+          name: "obsidian",
+          url: https://github.com/obsidianmd/obsidian-releases/releases/download/v1.7.7/obsidian_1.7.7_amd64.deb,
+        }
+      - {
           name: "slack",
           url: https://downloads.slack-edge.com/desktop-releases/linux/x64/4.41.105/slack-desktop-4.41.105-amd64.deb,
         }
@@ -127,7 +131,6 @@
         cmd: python3.10 --version
       register: python_version
       changed_when: false
-
 # - name: Install Spotify
 #   hosts: localhost
 #   become: true
