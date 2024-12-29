@@ -3,6 +3,8 @@
   become_user: "{{ user }}"
   hosts: localhost
   tasks:
+    - name: Install zoxide using curl
+      ansible.builtin.shell: curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
     - name: Install Kitty using curl
       ansible.builtin.shell: |
         curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
