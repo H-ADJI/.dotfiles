@@ -58,6 +58,7 @@
         - eza
         - bat
         - python3.12-venv
+        - uidmap
 
 - name: Download and install multiple .deb packages using Nala
   hosts: localhost
