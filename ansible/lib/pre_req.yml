@@ -1,7 +1,6 @@
 - name: Uninstall Firefox if installed via Snap
   hosts: localhost
   become: true
-  # become_user: "{{ user }}"
   tasks:
     - name: Check if Firefox is installed via Snap
       ansible.builtin.shell: "snap list firefox"

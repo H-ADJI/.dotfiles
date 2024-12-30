@@ -6,12 +6,12 @@
   },
   {
     "name": "Open Kitty Terminal",
-    "command": "kitty",
+    "command": "/home/khalil/.local/bin/kitty",
     "binding": "<Super>Return"
   },
   {
     "name": "Open Kitty with tmux",
-    "command": "kitty -e tmux",
+    "command": "/home/khalil/.local/bin/kitty -e tmux",
     "binding": "<Super>t"
   },
   {
@@ -36,12 +36,12 @@
   },
   {
     "name": "Open Firefox",
-    "command": "firefox",
+    "command": "/home/khalil/.local/bin/firefox",
     "binding": "<Super>b"
   },
   {
     "name": "system-ressource-monitoring",
-    "command": "kitty -e btm",
+    "command": "/home/khalil/.local/bin/kitty -e btm",
     "binding": "<Ctrl><Alt>b"
   }
 ]
