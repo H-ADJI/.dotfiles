@@ -11,4 +11,4 @@
         cmd: gsettings set org.gnome.desktop.background picture-uri "file://{{ home_dir }}/.dotfiles/black-hole.png"
     - name: set keybinds
       ansible.builtin.command:
-        cmd: set-binding apply_all
+        cmd: "{{ home_dir}}/apps/set-binding apply_all"
