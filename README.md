@@ -13,4 +13,4 @@ my ansible playbooks to setup my personal workstations
 ## TODO
 
 - launcher script to automate everything
-  - a script to curl on a clean install machine
+  - a script to curl on a clean install machine with apt, git.
