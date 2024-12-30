@@ -45,6 +45,7 @@
         - tree
         - zsh
         - jq
+        - bsdmainutils
         - build-essential
         - cargo
         - neofetch
