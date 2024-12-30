@@ -86,7 +86,7 @@
         dest: "{{ zsh_custom_path }}/plugins/evalcache"
 
 - name: Install Docker and configure non-root user access
-  hosts: all
+  hosts: localhost
   become: true
   tasks:
     - name: Download Docker installation script
