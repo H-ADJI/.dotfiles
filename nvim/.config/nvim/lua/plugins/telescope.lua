@@ -2,7 +2,8 @@ return {
   {
     "nvim-telescope/telescope.nvim",
     keys = {
-      { "<leader>fr", false },
+      { "<leader>fr", LazyVim.pick("oldfiles", { cwd = vim.uv.cwd() }), desc = "Recent (cwd)" },
+      { "<leader>fR", LazyVim.pick("oldfiles", { cwd = LazyVim.root() }), desc = "Recent Root Dir" },
       {
         "<leader>fu",
         "<cmd> Telescope find_files find_command=rg,--ignore,--hidden,--files,-u<cr>",
@@ -40,14 +41,5 @@ return {
     config = function()
       require("telescope").load_extension("file_browser")
     end,
-  },
-  {
-    "nvim-telescope/telescope-frecency.nvim",
-    config = function()
-      require("telescope").load_extension("frecency")
-    end,
-    keys = {
-      { "<leader>fr", "<cmd>Telescope frecency workspace=CWD<cr>", desc = "[F]ind [R]ecent buffer" },
-    },
   },
 }
