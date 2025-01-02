@@ -1,5 +1,5 @@
 source ~/zsh/zsh.sh
-source ~/zsh/direnv.sh
+source ~/zsh/direnv.zsh
 source ~/zsh/settings.sh
 source ~/zsh/path.sh
 source ~/zsh/aliases.sh
@@ -8,3 +8,4 @@ source ~/zsh/fzf.sh
 source ~/zsh/scrapy.sh
 source ~/zsh/tmux.sh
 source ~/zsh/zoxide.sh
+source ~/zsh/uv.zsh
