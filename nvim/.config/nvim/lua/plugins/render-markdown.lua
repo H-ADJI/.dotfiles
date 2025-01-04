@@ -34,5 +34,13 @@ return {
         "RenderMarkdownH6",
       },
     },
+    bullet = {
+      -- Padding to add to the left of bullet point
+      left_pad = 1,
+      -- Padding to add to the right of bullet point
+      right_pad = 1,
+      -- Highlight for the bullet icon
+      highlight = "RenderMarkdownBullet",
+    },
   },
 }
