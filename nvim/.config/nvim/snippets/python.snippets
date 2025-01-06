@@ -124,6 +124,7 @@ snippet banser
           return banners
 
       async def get_banners(self, page: Page, _, playwright_request: PlaywrightRequest):
+          await self.accept_popups(page)
           await self.load_content(page)
           playwright_request.meta["classic"] = await self.scrape_banners(page, self.classic_selector, screen=True)
           playwright_request.meta["sponsored"] = await self.scrape_banners(page, self.sponsored_selector, screen=True)
