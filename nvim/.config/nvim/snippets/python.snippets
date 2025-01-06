@@ -128,7 +128,7 @@ snippet banser
           await self.load_content(page)
           playwright_request.meta["classic"] = await self.scrape_banners(page, self.classic_selector, screen=True)
           playwright_request.meta["sponsored"] = await self.scrape_banners(page, self.sponsored_selector, screen=True)
-          playwright_request.meta["showcase"] = await self.scrape_banners(page, self.classic_selector, screen=True)
+          playwright_request.meta["showcase"] = await self.scrape_banners(page, self.showcase_selector, screen=True)
           playwright_request.meta["slider"] = await self.scrape_banners(page, self.slider_selector)
 
       def banner_builder(
