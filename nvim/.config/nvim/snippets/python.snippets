@@ -1,0 +1,18 @@
+snippet plr
+  yield PlaywrightRequest(
+                        $1,
+                        callback=self.$2,
+                        meta={
+                            "cache_this": True,
+                            "playwright": {
+                                "wait_time": self.wait_time,
+                            },
+                        },
+                        cb_kwargs=dict(),
+                        dont_filter=True,
+                    )
+
+snippet prx
+    proxy = playwright_proxy = ["AWS_EU", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
+    oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "$1"
+    oxylabs_residential_continent = "$2"
