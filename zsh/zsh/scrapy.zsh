@@ -1,16 +1,28 @@
 #!/bin/zsh
-# for scrapy fuzzy search
-scrapy_fzf_spiders() {
+
+# to persist spiders list, may cause inconsistencies
+PERSIST_SPIDERS=1
+
+fzf_spiders() {
   # Run FZF with a custom appearance
-  touch /tmp/spiders.tmp
-  if command -v scrapy &>/dev/null; then
-    scrapy list 2>/dev/null 1>/tmp/spiders.tmp
-  else
-    print -P "\nCurrent directory is not a %B%F{green}scrapy%b%f project directory, using cached spider list"
+  cache_dir="$HOME/.local/share/scrapy"
+  cache_file="/tmp/spiders.tmp"
+
+  if [ $PERSIST_SPIDERS -eq 1 ]; then
+    mkdir -p $cache_dir
+    cache_file="$cache_dir/scrapy"
   fi
+
+  if command -v scrapy &>/dev/null; then
+    touch $cache_file
+    scrapy list 2>/dev/null 1>$cache_file
+  else
+    print -P "\nCurrent directory is not a %B%F{green}scrapy%b%f project directory, using cached spider list (Last update $(date -r $cache_file '+%m-%d-%Y %H:%M:%S' 2>/dev/null))"
+  fi
+
   zle redisplay
   local spider=$(
-    cat /tmp/spiders.tmp | fzf --height 40% --layout=reverse \
+    cat $cache_file 2>/dev/null | fzf --height 40% --layout=reverse \
       --border --prompt="Select Spider: " --pointer="▶ " --marker="✔ " \
       --preview="echo 'Spider: {}'" --preview-window=down:1:wrap
   )
@@ -22,5 +34,5 @@ scrapy_fzf_spiders() {
   zle redisplay
 }
 # Define the widget and bind it to Ctrl+f
-zle -N scrapy_fzf_spiders
-bindkey '^f' scrapy_fzf_spiders
+zle -N fzf_spiders
+bindkey '^f' fzf_spiders
