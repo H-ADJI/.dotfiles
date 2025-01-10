@@ -28,11 +28,12 @@ snippet bancat
   from parsel import Selector
   from playwright.async_api import Page
   from scrapy.http import HtmlResponse
+from core.spiders_fwk.playwright_spider import PlaywrightSpider
   from spiders.$1 import $2
   from tools.banner_utils import BucketImage, playwright_screenshot
 
 
-  class BannerCategory(V4Spider):
+class BannerCategory(PlaywrightSpider, V4Spider):
       domain = $2.domain
       retailer_id = $2.retailer_id
       proxy = playwright_proxy = ["AWS_$3", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
