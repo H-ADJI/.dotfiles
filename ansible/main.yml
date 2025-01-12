@@ -12,9 +12,6 @@
         home_dir: "/home/khalil"
         user: "khalil"
 
-- name: Include basic utilities
-  import_playbook: lib/pre_req.yml
-
 - name: Include apps installation
   import_playbook: lib/apps.yml
 

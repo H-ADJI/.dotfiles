@@ -6,6 +6,3 @@
 
 - name: Include [DOTFILES] symlinks
   import_playbook: configs/dotfiles.yml
-
-- name: Include [GSETTINGS] setup
-  import_playbook: configs/gsettings.yml

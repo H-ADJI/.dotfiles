@@ -1,9 +1,0 @@
-[Desktop Entry]
-Name=Spicetify
-Comment=cutsom spotify client
-Exec=/home/khalil/apps/spicetify-launcher %u
-Icon=/home/khalil/.dotfiles/assets/spicetify.png
-Terminal=false
-Type=Application
-Categories=Audio;Music;Player;AudioVideo;
-StartupWMClass=spicetify

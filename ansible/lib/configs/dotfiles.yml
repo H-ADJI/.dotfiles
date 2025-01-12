@@ -17,12 +17,9 @@
         cmd: stow -v -t ~ "{{ item }}"
         chdir: "{{ home_dir }}/.dotfiles"
       loop:
-        - alacritty
         - applications
         - direnv
-        - firefox
         - git
-        - gsettings
         - kitty
         - nvim
         - scripts
