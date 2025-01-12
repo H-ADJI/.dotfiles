@@ -18,7 +18,6 @@
         chdir: "{{ home_dir }}/.dotfiles"
       loop:
         - applications
-        - direnv
         - git
         - kitty
         - nvim
