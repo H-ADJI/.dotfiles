@@ -1,16 +1,10 @@
-# Purpose
+# Content
 
-my ansible playbooks to setup my personal workstations
+- My ansible playbooks to setup my personal workstations
+- My dotfiles for ricing linux machine
 
-# Guide
+## How to use
 
-- install git
-- install ansible
-- launch using :
-  - ansible-pull -U https://github.com/H-ADJI/linux-install main.yml
-  - ansible-playbook main.yml (after cloning the repo)
-
-## TODO
-
-- launcher script to automate everything
-  - a script to curl on a clean install machine with apt, git.
+```sh
+sudo curl -SL https://raw.githubusercontent.com/H-ADJI/.dotfiles/master/install.sh | sh
+```
