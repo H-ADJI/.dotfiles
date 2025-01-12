@@ -22,7 +22,11 @@
         src: "{{ home_dir }}/.local/kitty.app/bin/kitten"
         dest: "{{ home_dir }}/.local/bin/kitten"
         state: link
-
+    - name: Download and install rustup
+      expect:
+        command: "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
+        responses:
+          "1": ""
 - name: Install zoxide
   become: true
   become_user: "{{ user }}"

@@ -3,7 +3,7 @@
   tasks:
     - name: Install utilities using Nala
       ansible.builtin.command:
-        cmd: "cargo install  {{ item }}"
+        cmd: "cargo install  {{ item }} --locked"
       loop:
         - jnv
         - yazi-fm
