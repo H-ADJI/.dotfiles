@@ -34,7 +34,6 @@
         - wget
         - xclip
         - wl-clipboard
-        # - btm
         - git
         - sed
         - unzip
@@ -55,8 +54,6 @@
         - pipewire
         - fd-find
         - solaar
-        - ranger
-        # - eza
         - bat
         - python3.11-venv
         - uidmap

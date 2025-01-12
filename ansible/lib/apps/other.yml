@@ -3,10 +3,6 @@
   become_user: "{{ user }}"
   hosts: localhost
   tasks:
-    - name: Install uv package manager
-      ansible.builtin.shell: curl -LsSf https://astral.sh/uv/install.sh | sh
-    - name: Install zoxide using curl
-      ansible.builtin.shell: curl -sSfL https://raw.githubusercontent.com/ajeetdsouza/zoxide/main/install.sh | sh
     - name: Install Kitty using curl
       ansible.builtin.shell: |
         curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
@@ -22,11 +18,18 @@
         src: "{{ home_dir }}/.local/kitty.app/bin/kitten"
         dest: "{{ home_dir }}/.local/bin/kitten"
         state: link
+
+- name: Install rustup
+  become: true
+  become_user: "{{ user }}"
+  hosts: localhost
+  tasks:
     - name: Download and install rustup
       expect:
         command: "curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh"
         responses:
           "1": ""
+
 - name: Install zoxide
   become: true
   become_user: "{{ user }}"
