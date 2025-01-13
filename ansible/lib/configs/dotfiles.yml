@@ -23,7 +23,6 @@
         - nvim
         - scripts
         - zsh
-        - tmux
         - ssh
 
 - name: Install TPM plugins
@@ -33,4 +32,8 @@
   tasks:
     - name: Download Docker installation script
       shell: |
-        bash {{ home_dir}}/tmux/plugins/tpm/bin/install_plugins
+        bash {{ home_dir}}/.tmux/plugins/tpm/bin/install_plugins
+    - name: Apply stow tmuxifier layouts
+      ansible.builtin.command:
+        cmd: stow -v -t ~ tmux
+        chdir: "{{ home_dir }}/.dotfiles"
