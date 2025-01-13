@@ -5,7 +5,7 @@
       ansible.builtin.command:
         cmd: "cargo install  {{ item }} --locked"
       loop:
-        - eza
+        # - eza
         - bottom
         # - jnv
         # - yazi-fm
