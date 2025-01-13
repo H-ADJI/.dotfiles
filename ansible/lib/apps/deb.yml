@@ -13,10 +13,10 @@
     - name: Upgrade packages using Nala
       ansible.builtin.command:
         cmd: nala upgrade -y
-    - name: Install nala completion
-      become_user: "{{ user }}"
-      ansible.builtin.command:
-        cmd: nala --install-completion zsh
+    # - name: Install nala completion
+    #   become_user: "{{ user }}"
+    #   ansible.builtin.command:
+    #     cmd: nala --install-completion zsh
 
 - name: Installing apps from the public Deb repo
   hosts: localhost
