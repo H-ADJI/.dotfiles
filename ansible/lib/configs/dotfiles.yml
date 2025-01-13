@@ -24,3 +24,11 @@
         - scripts
         - tmux
         - zsh
+- name: Install TPM plugins
+  hosts: localhost
+  become_user: "{{ user }}"
+  become: true
+  tasks:
+    - name: Download Docker installation script
+      shell: |
+        bash {{ home_dir}}/tmux/plugins/tpm/bin/install_plugins
