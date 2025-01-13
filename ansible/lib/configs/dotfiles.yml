@@ -22,12 +22,14 @@
         - kitty
         - nvim
         - scripts
-        - tmux
         - zsh
+        - tmux
+        - ssh
+
 - name: Install TPM plugins
   hosts: localhost
-  become_user: "{{ user }}"
   become: true
+  become_user: "{{ user }}"
   tasks:
     - name: Download Docker installation script
       shell: |

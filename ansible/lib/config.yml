@@ -1,8 +1,5 @@
 - name: Include [Fonts]
   import_playbook: configs/fonts.yml
 
-- name: Include [SSH] setup
-  import_playbook: configs/ssh.yml
-
 - name: Include [DOTFILES] symlinks
   import_playbook: configs/dotfiles.yml
