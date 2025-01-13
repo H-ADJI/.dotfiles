@@ -13,10 +13,6 @@
     - name: Upgrade packages using Nala
       ansible.builtin.command:
         cmd: nala upgrade -y
-    # - name: Install nala completion
-    #   become_user: "{{ user }}"
-    #   ansible.builtin.command:
-    #     cmd: nala --install-completion zsh
 
 - name: Installing apps from the public Deb repo
   hosts: localhost
@@ -67,6 +63,10 @@
   become: true
   vars:
     deb_packages:
+      - {
+          name: "chrome",
+          url: https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb,
+        }
       - {
           name: "fastfetch",
           url: https://github.com/fastfetch-cli/fastfetch/releases/download/2.32.1/fastfetch-linux-amd64.deb,
