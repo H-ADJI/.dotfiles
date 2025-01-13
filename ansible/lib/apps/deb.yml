@@ -34,7 +34,6 @@
         - sed
         - unzip
         - timeshift
-        - kitty
         - zoxide
         - adb
         - stow

@@ -6,6 +6,27 @@
     - name: Install uv package manager
       ansible.builtin.shell: curl -LsSf https://astral.sh/uv/install.sh | sh
 
+- name: Install Kitty terminal
+  become: true
+  become_user: "{{ user }}"
+  hosts: localhost
+  tasks:
+    - name: Install Kitty using curl
+      ansible.builtin.shell: |
+        curl -L https://sw.kovidgoyal.net/kitty/installer.sh | sh /dev/stdin
+      args:
+        creates: "{{ home_dir }}/.local/kitty.app/bin/kitty"
+    - name: Create a symlink for Kitty in ~/.local/bin
+      ansible.builtin.file:
+        src: "{{ home_dir }}/.local/kitty.app/bin/kitty"
+        dest: "{{ home_dir }}/.local/bin/kitty"
+        state: link
+    - name: Create symlink for the 'kitten' in ~/.local/bin
+      ansible.builtin.file:
+        src: "{{ home_dir }}/.local/kitty.app/bin/kitten"
+        dest: "{{ home_dir }}/.local/bin/kitten"
+        state: link
+
 - name: install ZSH
   hosts: localhost
   become: True
