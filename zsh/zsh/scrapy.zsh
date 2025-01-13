@@ -1,5 +1,9 @@
 #!/bin/zsh
 
+shub_deploy() {
+
+  shub image upload $SHUB_DEVZONE --build-arg PYPI_SECRET=$PYPI_SECRET
+}
 # to persist spiders list, may cause inconsistencies
 PERSIST_SPIDERS=1
 
