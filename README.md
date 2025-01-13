@@ -12,4 +12,4 @@
 sudo curl -SL https://raw.githubusercontent.com/H-ADJI/.dotfiles/master/install.sh | sh
 ```
 
-3. install tmux tpm plugins using `ctrl+a I`
+3. setup ssh key permission for ssh-agent
