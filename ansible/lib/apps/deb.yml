@@ -38,6 +38,8 @@
         - sed
         - unzip
         - timeshift
+        - kitty
+        - zoxide
         - adb
         - stow
         - tmux
@@ -53,6 +55,8 @@
         - direnv
         - pipewire
         - fd-find
+        - eza
+        - btm
         - solaar
         - bat
         - python3.12-venv
