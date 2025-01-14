@@ -1,12 +1,13 @@
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
 vim.g.autoformat = false
-vim.opt.tabstop = 2 -- Number of spaces tabs count for
+-- vim.opt.tabstop = 2 -- Number of spaces tabs count for
 vim.opt.number = true
+vim.opt.shiftwidth = 4
 vim.opt.relativenumber = true
 vim.opt.expandtab = true
 -- Enable mouse mode, can be useful for resizing splits for example!
-vim.opt.mouse = 'a'
+vim.opt.mouse = "a"
 -- Don't show the mode, since it's already in the status line
 -- vim.opt.showmode = false
 -- Sync clipboard between OS and Neovim.
@@ -14,7 +15,7 @@ vim.opt.mouse = 'a'
 --  Remove this option if you want your OS clipboard to remain independent.
 --  See `:help 'clipboard'`
 vim.schedule(function()
-  vim.opt.clipboard = 'unnamedplus'
+	vim.opt.clipboard = "unnamedplus"
 end)
 -- Enable break indent
 vim.opt.breakindent = true
@@ -25,7 +26,7 @@ vim.opt.undolevels = 10000
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 -- Keep signcolumn on by default
-vim.opt.signcolumn = 'yes'
+vim.opt.signcolumn = "yes"
 
 -- Decrease update time
 vim.opt.updatetime = 250
@@ -41,7 +42,7 @@ vim.opt.splitbelow = true
 vim.opt.list = true
 -- vim.opt.listchars = { tab = '» ', trail = '·', nbsp = '␣' }
 -- Preview substitutions live, as you type!
-vim.opt.inccommand = 'split'
+vim.opt.inccommand = "split"
 -- Show which line your cursor is on
 vim.opt.cursorline = true
 -- Minimal number of screen lines to keep above and below the cursor.
