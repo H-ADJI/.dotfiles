@@ -169,12 +169,15 @@ snippet bancat
               item["category"] = path
               item["products"] = []
               # add banners products
-              redirect_url = (
-                  src.xpath(".//a[not(contains(@href,'adssettings'))]/@href").get()
-                  or src.xpath(".//a/@href").get()
-                  or src.xpath("./@href").get()
-              )
-              if redirect_url:
+            redirect_url = (
+                src.xpath(".//a[not(contains(@href,'adssettings'))]/@href").get()
+                or src.xpath(".//a/@href").get()
+                or src.xpath("./@href").get("")
+            )
+              if banner_type == BannerTypes.SPONSORED_PRODUCT or banner_type == BannerTypes.SHOWCASE:
+                  pass
+              elif redirect_url:
+                  item["redirect_url"] = urljoin(self.domain, redirect_url)
                   yield PlaywrightRequest(
                       item["redirect_url"],
                       callback=self.add_products,

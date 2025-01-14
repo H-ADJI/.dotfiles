@@ -1,5 +1,5 @@
 [window]
-opacity = 0.9
+# opacity = 0.99999999
 padding.x = 30
 padding.y = 30
 decorations = "None"
@@ -8,7 +8,10 @@ startup_mode = "Maximized"
 [scrolling]
 history = 50_000
 [font]
-normal.family = "JetBrainsMono Nerd Font"
+normal = { style = "Regular", family = "JetBrainsMono Nerd Font" }
+bold = { style = "Bold", family = "JetBrainsMono Nerd Font" }
+bold_italic = { style = "Bold Italic", family = "JetBrainsMono Nerd Font" }
+italic = { style = "Italic", family = "JetBrainsMono" }
 size = 13.0
 [colors.bright]
 black = "#444b6a"
