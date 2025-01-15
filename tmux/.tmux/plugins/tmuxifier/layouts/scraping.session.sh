@@ -4,7 +4,7 @@ session_root "~/dataimpact-scraping/"
 
 # Create session with specified name if it does not already exist. If no
 # argument is given, session name will be based on layout file name.
-if initialize_session "data impact scraping"; then
+if initialize_session "DI Scraping"; then
   new_window "code editor"
   run_cmd "nv"
   new_window "shell"
