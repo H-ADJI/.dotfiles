@@ -93,12 +93,11 @@ snippet bancat
               meta={"path": []},
           )
           for category in response.xpath(""):
-              url = category.xpath("").get("")
-              path = category.xpath("").getall()
+              url = category.xpath("./@href").get("")
               yield RequestShelf(
                   urljoin(self.domain, url),
                   callback=self.parse_banners,
-                  meta={"path": path},
+                  meta={"path": []},
               )
 
       @staticmethod
@@ -169,7 +168,7 @@ snippet bancat
               item["category"] = path
               item["products"] = []
               # add banners products
-            redirect_url = (
+              redirect_url = (
                 src.xpath(".//a[not(contains(@href,'adssettings'))]/@href").get()
                 or src.xpath(".//a/@href").get()
                 or src.xpath("./@href").get("")
