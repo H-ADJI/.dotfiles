@@ -17,6 +17,9 @@ if initialize_session "dotfiles"; then
   new_window "zsh config"
   run_cmd "nv"
 
+  window_root "~/.dotfiles/ansible/"
+  new_window "ansible playbooks"
+  run_cmd "nv"
   select_window 1
 fi
 
