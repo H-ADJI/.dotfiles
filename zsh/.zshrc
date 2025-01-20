@@ -9,3 +9,4 @@ source ~/zsh/scrapy.zsh
 source ~/zsh/tmux.zsh
 source ~/zsh/zoxide.zsh
 source ~/zsh/uv.zsh
+source ~/zsh/leetcode.zsh
