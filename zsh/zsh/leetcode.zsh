@@ -5,7 +5,7 @@ fzf_leetcode_problems() {
     lc list -c algorithms -q L | fzf --height 60% --layout=reverse --border --prompt="Select Problem: " --pointer="▶ " --marker="✔ " --preview-window=down:1:wrap
   )
   # problem=$(echo $problem | grep -oP "(?<=\[ )\d+")
-  local parsed=$(echo $problem | grep -oP "\d+(?= \])")
+  local parsed=$(echo $problem | grep -oP "\s*\d+\s*(?=\])")
   # Insert the selected spider name into the command line
   if [ -n "$problem" ]; then
     LBUFFER="lc edit ${LBUFFER}${parsed} "
