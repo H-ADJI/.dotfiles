@@ -126,13 +126,14 @@ snippet bancat
               for i in range(banners_count):
                   banner = locators.nth(i)
                   screenshot = None
+                  if not await banner.is_visible():
+                      continue
                   if iframe:
                       banner = banner.frame_locator("//iframe").locator("//body")
                   if screen:
-                      if await banner.is_visible():
-                          await banner.scroll_into_view_if_needed()
-                          await page.wait_for_timeout(1_000)
-                          screenshot = await playwright_screenshot(element=banner)
+                      await banner.scroll_into_view_if_needed()
+                      await page.wait_for_timeout(1_000)
+                      screenshot = await playwright_screenshot(element=banner)
                   html = await banner.evaluate("element => element.outerHTML")
                   source = Selector(html)
                   banners.append((screenshot, source, selector))
@@ -332,12 +333,14 @@ snippet banser
               for i in range(banners_count):
                   banner = locators.nth(i)
                   screenshot = None
+                  if not await banner.is_visible():
+                      continue
                   if iframe:
                       banner = banner.frame_locator("//iframe").locator("//body")
                   if screen:
-                      if await banner.is_visible():
-                          screenshot = await playwright_screenshot(element=banner)
-                          await page.wait_for_timeout(500)
+                      await banner.scroll_into_view_if_needed()
+                      await page.wait_for_timeout(1_000)
+                      screenshot = await playwright_screenshot(element=banner)
                   html = await banner.evaluate("element => element.outerHTML")
                   source = Selector(html)
                   banners.append((screenshot, source, selector))
