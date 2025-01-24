@@ -1,9 +1,8 @@
-
 [Desktop Entry]
 Type=Application
-Exec=kitty -e notes
+Exec=/home/khalil/apps/bspeaker
 Hidden=false
 NoDisplay=false
 X-GNOME-Autostart-enabled=true
-Name=kitty terminal
-Comment=favorite term emulator
+Name=bottom
+Comment=bottom system ressources monitoring TUI
