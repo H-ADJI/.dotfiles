@@ -1,7 +1,8 @@
 - name: setup gsettings ( GNOME SETTINGS )
   hosts: localhost
   become: true
+  become_user: "{{ user }}"
   tasks:
     - name: Download Docker installation script
       shell: |
-        bash {{ home_dir }}/.dotfiles/gsettings/workspaces.sh
+        cat {{ home_dir }}/.dotfiles/gsettings/workspaces.sh | bash
