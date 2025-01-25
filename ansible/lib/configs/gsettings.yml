@@ -4,4 +4,4 @@
   tasks:
     - name: Download Docker installation script
       shell: |
-        {{ home_dir }}/.dotfiles/gsettings/workspaces.sh
+        bash {{ home_dir }}/.dotfiles/gsettings/workspaces.sh
