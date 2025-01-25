@@ -24,7 +24,6 @@
         - scripts
         - zsh
         - ssh
-        - tmux
 
 - name: Install TPM plugins
   hosts: localhost
@@ -34,7 +33,7 @@
     - name: install tpm plugins
       shell: |
         bash {{ home_dir}}/.tmux/plugins/tpm/bin/install_plugins
-    # - name: Apply stow tmuxifier layouts
-    #   ansible.builtin.command:
-    #     cmd: stow -v -t ~ tmux
-    #     chdir: "{{ home_dir }}/.dotfiles"
+    - name: Apply stow tmuxifier layouts
+      ansible.builtin.command:
+        cmd: stow -v -t ~ tmux
+        chdir: "{{ home_dir }}/.dotfiles"
