@@ -1,0 +1,10 @@
+- name: Installing cargo binaries
+  hosts: localhost
+  become_user: "{{ user }}"
+  become: true
+  tasks:
+    - name: Install utilities using Nala
+      ansible.builtin.command:
+        cmd: "cargo install {{ item }} --locked"
+      loop:
+        - leetcode-cli
