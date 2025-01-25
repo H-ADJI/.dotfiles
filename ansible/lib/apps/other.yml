@@ -102,5 +102,7 @@
       shell: |
         sh get-docker.sh
     - name: Add user to the docker group
+      become_user: "{{ user }}"
+      become: True
       shell: |
         dockerd-rootless-setuptool.sh install
