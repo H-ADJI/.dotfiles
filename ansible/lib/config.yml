@@ -3,3 +3,6 @@
 
 - name: Include [DOTFILES] symlinks
   import_playbook: configs/dotfiles.yml
+
+- name: apply [GNOME] settings
+  import_playbook: configs/gsettings.yml

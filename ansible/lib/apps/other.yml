@@ -93,7 +93,6 @@
 
 - name: Install Docker and configure non-root user access
   hosts: localhost
-  become_user: "{{ user }}"
   become: true
   tasks:
     - name: Download Docker installation script
@@ -103,6 +102,5 @@
       shell: |
         sh get-docker.sh
     - name: Add user to the docker group
-      become_user: "{{ user }}"
       shell: |
         dockerd-rootless-setuptool.sh install
