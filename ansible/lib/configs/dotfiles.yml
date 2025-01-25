@@ -24,6 +24,7 @@
         - scripts
         - zsh
         - ssh
+        - cmus
 
 - name: Install TPM plugins
   hosts: localhost
