@@ -25,6 +25,7 @@
         - zsh
         - ssh
         - cmus
+        - tmux
 
 - name: Install TPM plugins
   hosts: localhost
@@ -36,5 +37,5 @@
         bash {{ home_dir}}/.tmux/plugins/tpm/bin/install_plugins
     - name: Apply stow tmuxifier layouts
       ansible.builtin.command:
-        cmd: stow -v -t ~ tmux
+        cmd: stow -v -t ~ tmuxifier
         chdir: "{{ home_dir }}/.dotfiles"
