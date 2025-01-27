@@ -30,3 +30,8 @@ chmod 600 {SSH_KEY}
 ```bash
 ssh-add {SSH_KEY}
 ```
+
+## TODO
+
+- fix docker post-install permission issues
+- install and link uv python binaries
