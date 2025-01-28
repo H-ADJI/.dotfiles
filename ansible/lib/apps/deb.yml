@@ -46,7 +46,6 @@
         - jq
         - bsdmainutils
         - build-essential
-        # - cargo
         - neofetch
         - gcc
         - libsqlite3-dev
@@ -60,7 +59,8 @@
         - btm
         - solaar
         - bat
-        - python3.12-venv
+        - python3-venv
+        - python3-pip
         - uidmap
 
 - name: Download and install multiple .deb packages using Nala
