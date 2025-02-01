@@ -21,7 +21,7 @@ fzf_spiders() {
     touch $cache_file
     scrapy list 2>/dev/null 1>$cache_file
   else
-    print -P "\nCurrent directory is not a %B%F{green}scrapy%b%f project directory, using cached spider list (Last update $(date -r $cache_file '+%m-%d-%Y %H:%M:%S' 2>/dev/null))"
+    print -P "\n%F{yellow}Using cached spider list (Last update: $(date -r "$cache_file" '+%m-%d-%Y %H:%M:%S' 2>/dev/null))%f"
   fi
 
   zle redisplay
