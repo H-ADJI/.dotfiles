@@ -37,8 +37,8 @@ snippet bancat
       domain = $2.domain
       retailer_id = $2.retailer_id
       proxy = playwright_proxy = ["AWS_$3", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
-      oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "$4"
-      oxylabs_residential_continent = "$5"
+      oxylabs_residential_country = iproyal_residential_country = "$4"
+      oxylabs_dc_country = "$5"
       playwright_nb_tabs = 2
       browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       playwright_disable_webrtc = True
@@ -55,6 +55,7 @@ snippet bancat
       sponsored_selector = []
       showcase_selector = []
       slider_selector = []
+      popups_selectors = []
       paths_urls: list[tuple]
 
       @property
@@ -100,11 +101,12 @@ snippet bancat
                   meta={"path": []},
               )
 
-      @staticmethod
-      async def accept_popups(page: Page):
-          button = page.locator("//button[@id='onetrust-accept-btn-handler']")
-          if await button.count():
-              await button.click()
+      @classmethod
+      async def accept_popups(cls, page: Page):
+          for selector in cls.popups_selectors:
+              button = page.locator(selector)
+              if await button.count():
+                  await button.click()
 
       @staticmethod
       async def load_content(page: Page, n: int = 5):
@@ -260,7 +262,6 @@ snippet banser
       retailer_id = $2.retailer_id
       proxy = playwright_proxy = ["AWS_US", "AWS_EU", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
       oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "SK"
-      oxylabs_residential_continent = "EU"
       browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       playwright_nb_tabs = 2
       playwright_disable_webrtc = True
