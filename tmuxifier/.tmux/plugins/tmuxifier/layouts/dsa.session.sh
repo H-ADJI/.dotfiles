@@ -7,7 +7,6 @@ session_root "~/neurogenesis/"
 if initialize_session "dsa"; then
   new_window "editor"
   run_cmd "nv"
-  new_window "shell"
 fi
 
 # Finalize session creation and switch/attach to it.
