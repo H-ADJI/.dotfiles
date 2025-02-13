@@ -11,6 +11,11 @@ add_note() {
   bat ~/secondBrain/ideas.md
 }
 
+git_release() {
+  git commit -am "update changelog" && git tag $1 && git push && git push origin $1
+}
+
+
 create_bootable_usb() {
   # Check if exactly two arguments are provided
   if [ "$#" -ne 2 ]; then

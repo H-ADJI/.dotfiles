@@ -39,3 +39,33 @@ fzf_spiders() {
 # Define the widget and bind it to Ctrl+f
 zle -N fzf_spiders
 bindkey '^f' fzf_spiders
+
+docker_spider() {
+  if [ $# -lt 2 ]; then
+    echo "Usage: $0 <units> <spider_name> [any additional scrapy args]"
+    echo "Example: $0 2 my_spider -a crawl_id=1337"
+    return
+  fi
+  # Arguments
+  UNITS=$1
+  SPIDER_NAME=$2
+  EXTRA_ARGS="${@:3}" # all remaining args after the second
+
+  # Compute resources
+  MEMORY=$((UNITS * 1024))M # 1 unit = 1GB RAM
+
+  # Docker options
+  DOCKER_IMAGE="scrapy_nf:latest"
+  ENV_FILE=".env"
+
+  # Run the container with the specified resources
+  echo "Running spider '$SPIDER_NAME' with $UNITS unit(s) ($MEMORY RAM, $CPUS CPU)..."
+
+  docker image build -t $SPIDER_NAME --build-arg PYPI_SECRET=$PYPI_SECRET .
+  docker container run --cpus=$UNITS --memory="$MEMORY" \
+    --env-file .env --env V4_PROXIES=$V4_PROXIES \
+    --env GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES=$GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES \
+    --env GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
+    $SPIDER_NAME scrapy crawl $SPIDER_NAME $EXTRA_ARGS
+
+}
