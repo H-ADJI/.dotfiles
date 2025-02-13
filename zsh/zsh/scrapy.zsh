@@ -54,18 +54,14 @@ docker_spider() {
   # Compute resources
   MEMORY=$((UNITS * 1024))M # 1 unit = 1GB RAM
 
-  # Docker options
-  DOCKER_IMAGE="scrapy_nf:latest"
-  ENV_FILE=".env"
-
   # Run the container with the specified resources
   echo "Running spider '$SPIDER_NAME' with $UNITS unit(s) ($MEMORY RAM, $CPUS CPU)..."
 
-  docker image build -t $SPIDER_NAME --build-arg PYPI_SECRET=$PYPI_SECRET .
+  docker image build -t test_docker_spider --build-arg PYPI_SECRET=$PYPI_SECRET .
   docker container run --cpus=$UNITS --memory="$MEMORY" \
     --env-file .env --env V4_PROXIES=$V4_PROXIES \
     --env GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES=$GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES \
     --env GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
-    $SPIDER_NAME scrapy crawl $SPIDER_NAME $EXTRA_ARGS
+    test_docker_spider scrapy crawl $SPIDER_NAME $EXTRA_ARGS
 
 }
