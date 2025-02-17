@@ -16,6 +16,8 @@
 
       - name: "jnv"
         url: https://github.com/ynqa/jnv/releases/download/v0.4.2/jnv-x86_64-unknown-linux-gnu.tar.xz
+        binaries_to_symlink:
+          - "jnv/jnv"
 
       - name: nvim
         url: https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
