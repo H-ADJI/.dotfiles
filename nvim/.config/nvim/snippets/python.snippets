@@ -67,7 +67,7 @@ snippet bancat
 
       def start_requests(self):
           yield PlaywrightRequest(
-                  f"{self.domain}/cat/all",
+                  self.domain,
                   callback=self.parse_categories,
                   meta={
                       "playwright": {
@@ -176,7 +176,7 @@ snippet bancat
                 or src.xpath("./@href").get("")
             )
               if banner_type == BannerTypes.SPONSORED_PRODUCT or banner_type == BannerTypes.SHOWCASE:
-                  pass
+                  yield item
               elif redirect_url:
                   item["redirect_url"] = urljoin(self.domain, redirect_url)
                   yield PlaywrightRequest(
@@ -241,8 +241,8 @@ snippet bancat
           elif pdp_match := response.xpath(""):
               product = ItemBannerProduct()
               product["id"] = pdp_match.xpath("")
-              product["detail_link"] = pdp_match.xpath("").get()
-              product["image_link"] = pdp_match.xpath("").get()
+              product["detail_link"] = urljoin(self.domain, m.xpath(".//a/@href").get())
+              product["image_link"] = urljoin(self.domain, m.xpath(".//img/@src").get())
               products.append(product)
 
           banner["products"] = products or None
@@ -408,7 +408,7 @@ snippet bancatms
                 or src.xpath("./@href").get("")
             )
               if banner_type == BannerTypes.SPONSORED_PRODUCT or banner_type == BannerTypes.SHOWCASE:
-                  pass
+                  yield item
               elif redirect_url:
                   item["redirect_url"] = urljoin(self.domain, redirect_url)
                   yield PlaywrightRequest(
@@ -473,8 +473,8 @@ snippet bancatms
           elif pdp_match := response.xpath(""):
               product = ItemBannerProduct()
               product["id"] = pdp_match.xpath("")
-              product["detail_link"] = pdp_match.xpath("").get()
-              product["image_link"] = pdp_match.xpath("").get()
+              product["detail_link"] = urljoin(self.domain, m.xpath(".//a/@href").get())
+              product["image_link"] = urljoin(self.domain, m.xpath(".//img/@src").get())
               products.append(product)
 
           banner["products"] = products or None
@@ -542,7 +542,6 @@ snippet banser
                           "action": self.get_banners,
                       },
                   },
-                  dont_filter=True,
                   cb_kwargs=dict(keyword=keyword),
               )
 
@@ -621,7 +620,7 @@ snippet banser
                   or src.xpath("./@href").get()
               )
               if banner_type == BannerTypes.SPONSORED_PRODUCT or banner_type == BannerTypes.SHOWCASE:
-                  pass
+                  yield item
               elif redirect_url:
                   item["redirect_url"] = urljoin(self.domain, redirect_url)
                   yield PlaywrightRequest(
