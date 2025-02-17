@@ -63,7 +63,7 @@ snippet bancat
 
       @property
       def wait_time(self) -> int:
-          return random.randint(self.playwright_nb_tabs * 4, self.playwright_nb_tabs * 8)
+          return random.randint(self.playwright_nb_tabs * 3, self.playwright_nb_tabs * 6)
 
       def start_requests(self):
           yield PlaywrightRequest(
@@ -291,7 +291,7 @@ snippet bancatms
 
       @property
       def wait_time(self) -> int:
-          return random.randint(self.playwright_nb_tabs * 4, self.playwright_nb_tabs * 8)
+          return random.randint(self.playwright_nb_tabs * 3, self.playwright_nb_tabs * 6)
 
       def start_requests(self):
           if self.paths_urls:
@@ -482,7 +482,7 @@ snippet bancatms
 
 snippet banser
   import random
-  from urllib.parse import urljoin
+  from urllib.parse import quote, urljoin
 
   from core.config import BannerTypes
   from core.requests_di import PlaywrightRequest
@@ -533,7 +533,7 @@ snippet banser
       def parse_keywords(self, _: HtmlResponse):
           for keyword, lower_keyword in self.keywords:
               yield PlaywrightRequest(
-                  self.domain,
+                  f"{self.domain}/{quote(lower_keyword)}",
                   callback=self.parse_banners,
                   meta={
                       "keyword": lower_keyword,
