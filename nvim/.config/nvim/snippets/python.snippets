@@ -86,6 +86,8 @@ snippet bancat
                           "action": self.get_banners,
                       },
                   },
+            dont_filter=True,
+            cb_kwargs=dict(is_home=True),
           )
           for category in response.xpath(""):
               url = category.xpath("./@href").get("")
@@ -323,6 +325,7 @@ snippet bancatms
               self.domain,
               callback=self.parse_banners,
               meta={"path": []},
+              dont_filter=True,
           )
           for category in response.xpath(""):
               url = category.xpath("./@href").get("")
