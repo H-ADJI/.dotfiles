@@ -1,8 +1,8 @@
 [Desktop Entry]
 Type=Application
 Exec=/home/khalil/apps/bspeaker
-Hidden=false
-NoDisplay=false
+Hidden=true
+NoDisplay=true
 X-GNOME-Autostart-enabled=true
-Name=bottom
-Comment=bottom system ressources monitoring TUI
+Name=bspeaker
+Comment=speaker connection script
