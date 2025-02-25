@@ -25,7 +25,7 @@ snippet bancat
   from urllib.parse import urljoin
 
   from core.config import BannerTypes
-  from core.requests_di import PlaywrightRequest, RequestShelf
+  from core.requests_di import PlaywrightRequest
   from core.spiders_fwk.v4_spider import V4Spider
   from items.banner_category import ItemBannerCategory, ItemBannerProduct
   from parsel import Selector
@@ -59,7 +59,6 @@ snippet bancat
       showcase_selector = []
       slider_selector = []
       popups_selectors = []
-      paths_urls: list[tuple]
 
       @property
       def wait_time(self) -> int:
@@ -106,7 +105,7 @@ snippet bancat
       async def accept_popups(cls, page: Page):
           for selector in cls.popups_selectors:
               button = page.locator(selector)
-              if await button.count():
+              if await button.is_visible():
                   await button.click()
 
       @staticmethod
@@ -119,7 +118,7 @@ snippet bancat
               await page.wait_for_timeout(timeout=1_000)
 
       async def scrape_banners(
-          self, page: Page, selectors: list[str], iframe: bool = False, screen=False
+          self, page: Page, selectors: list[str], iframe: bool = False, screen=False,shadow=False
       ) -> list[tuple[BucketImage, Selector, str]]:
           banners = []
           for selector in selectors:
@@ -138,6 +137,8 @@ snippet bancat
                       await page.wait_for_timeout(1_000)
                       screenshot = await playwright_screenshot(element=banner)
                   html = await banner.evaluate("element => element.outerHTML")
+                  if shadow:
+                      html = await banner.evaluate("element => element.shadow.innerHTML")
                   source = Selector(html)
                   banners.append((screenshot, source, selector))
           return banners
@@ -200,7 +201,7 @@ snippet bancat
           path = response.xpath("").getall()
           if is_home:
               path = ["Home"]
-          banners = response.meta["sponsored"]
+          banners = response.meta.get("sponsored", [])
           yield from self.banner_builder(
               banners=banners,
               banner_type=BannerTypes.SPONSORED_PRODUCT,
@@ -208,14 +209,14 @@ snippet bancat
               path=path,
           )
 
-          banners = response.meta["classic"]
+          banners = response.meta.get("classic", [])
           yield from self.banner_builder(
               banners=banners,
               banner_type=BannerTypes.BANNER_HOME_PAGE if is_home else BannerTypes.CLASSIC,
               current_url=response.url,
               path=path,
           )
-          banners = response.meta["slider"]
+          banners = response.meta.get("slider", [])
           yield from self.banner_builder(
               banners=banners,
               banner_type=BannerTypes.SLIDER_HOME_PAGE if is_home else BannerTypes.CLASSIC,
@@ -223,13 +224,25 @@ snippet bancat
               path=path,
           )
 
-          banners = response.meta["showcase"]
+          banners = response.meta.get("showcase", [])
           yield from self.banner_builder(
               banners=banners,
               banner_type=BannerTypes.SHOWCASE,
               current_url=response.url,
               path=path,
           )
+          for category in response.xpath(""):
+              url = category.xpath("./@href").get("")
+              yield PlaywrightRequest(
+                  urljoin(self.domain, url),
+                  callback=self.parse_banners,
+                  meta={
+                      "playwright": {
+                          "wait_time": self.wait_time,
+                          "action": self.get_banners,
+                      },
+                  },
+              )
 
       def add_products(self, response: HtmlResponse, banner: ItemBannerCategory):
           products = []
@@ -237,14 +250,14 @@ snippet bancat
               for m in matches:
                   product = ItemBannerProduct()
                   product["id"] = m.xpath("")
-                  product["detail_link"] = m.xpath("").get()
-                  product["image_link"] = m.xpath("").get()
+                  product["detail_link"] = m.xpath(".//@href").get()
+                  product["image_link"] = m.xpath(".//img/@src").get()
                   products.append(product)
           elif pdp_match := response.xpath(""):
               product = ItemBannerProduct()
               product["id"] = pdp_match.xpath("")
-              product["detail_link"] = urljoin(self.domain, m.xpath(".//a/@href").get())
-              product["image_link"] = urljoin(self.domain, m.xpath(".//img/@src").get())
+              product["detail_link"] = response.url
+              product["image_link"] = urljoin(self.domain, pdp_match.xpath(".//img/@src").get())
               products.append(product)
 
           banner["products"] = products or None
@@ -339,7 +352,7 @@ snippet bancatms
       async def accept_popups(cls, page: Page):
           for selector in cls.popups_selectors:
               button = page.locator(selector)
-              if await button.count():
+              if await button.is_visible():
                   await button.click()
 
       @staticmethod
@@ -352,7 +365,7 @@ snippet bancatms
               await page.wait_for_timeout(timeout=1_000)
 
       async def scrape_banners(
-          self, page: Page, selectors: list[str], iframe: bool = False, screen=False
+          self, page: Page, selectors: list[str], iframe: bool = False, screen=False,shadow=False
       ) -> list[tuple[BucketImage, Selector, str]]:
           banners = []
           for selector in selectors:
@@ -371,6 +384,8 @@ snippet bancatms
                       await page.wait_for_timeout(1_000)
                       screenshot = await playwright_screenshot(element=banner)
                   html = await banner.evaluate("element => element.outerHTML")
+                  if shadow:
+                      html = await banner.evaluate("element => element.shadow.innerHTML")
                   source = Selector(html)
                   banners.append((screenshot, source, selector))
           return banners
@@ -433,7 +448,7 @@ snippet bancatms
           path = response.xpath("").getall()
           if is_home:
               path = ["Home"]
-          banners = response.meta["sponsored"]
+          banners = response.meta.get("sponsored", [])
           yield from self.banner_builder(
               banners=banners,
               banner_type=BannerTypes.SPONSORED_PRODUCT,
@@ -441,14 +456,14 @@ snippet bancatms
               path=path,
           )
 
-          banners = response.meta["classic"]
+          banners = response.meta.get("classic", [])
           yield from self.banner_builder(
               banners=banners,
               banner_type=BannerTypes.BANNER_HOME_PAGE if is_home else BannerTypes.CLASSIC,
               current_url=response.url,
               path=path,
           )
-          banners = response.meta["slider"]
+          banners = response.meta.get("slider", [])
           yield from self.banner_builder(
               banners=banners,
               banner_type=BannerTypes.SLIDER_HOME_PAGE if is_home else BannerTypes.CLASSIC,
@@ -456,13 +471,25 @@ snippet bancatms
               path=path,
           )
 
-          banners = response.meta["showcase"]
+          banners = response.meta.get("showcase", [])
           yield from self.banner_builder(
               banners=banners,
               banner_type=BannerTypes.SHOWCASE,
               current_url=response.url,
               path=path,
           )
+          for category in response.xpath(""):
+              url = category.xpath("./@href").get("")
+              yield PlaywrightRequest(
+                  urljoin(self.domain, url),
+                  callback=self.parse_banners,
+                  meta={
+                      "playwright": {
+                          "wait_time": self.wait_time,
+                          "action": self.get_banners,
+                      },
+                  },
+              )
 
       def add_products(self, response: HtmlResponse, banner: ItemBannerCategory):
           products = []
@@ -470,14 +497,14 @@ snippet bancatms
               for m in matches:
                   product = ItemBannerProduct()
                   product["id"] = m.xpath("")
-                  product["detail_link"] = m.xpath("").get()
-                  product["image_link"] = m.xpath("").get()
+                  product["detail_link"] = m.xpath(".//@href").get()
+                  product["image_link"] = m.xpath(".//img/@src").get()
                   products.append(product)
           elif pdp_match := response.xpath(""):
               product = ItemBannerProduct()
               product["id"] = pdp_match.xpath("")
-              product["detail_link"] = urljoin(self.domain, m.xpath(".//a/@href").get())
-              product["image_link"] = urljoin(self.domain, m.xpath(".//img/@src").get())
+              product["detail_link"] = response.url
+              product["image_link"] = urljoin(self.domain, pdp_match.xpath(".//img/@src").get())
               products.append(product)
 
           banner["products"] = products or None
@@ -555,7 +582,7 @@ snippet banser
       async def accept_popups(cls, page: Page):
           for selector in cls.popups_selectors:
               button = page.locator(selector)
-              if await button.count():
+              if await button.is_visible():
                   await button.click()
 
       @staticmethod
@@ -568,7 +595,7 @@ snippet banser
               await page.wait_for_timeout(timeout=1_000)
 
       async def scrape_banners(
-          self, page: Page, selectors: list[str], iframe: bool = False, screen=False
+          self, page: Page, selectors: list[str], iframe: bool = False, screen=False,shadow=False
       ) -> list[tuple[BucketImage, Selector, str]]:
           banners = []
           for selector in selectors:
@@ -587,6 +614,8 @@ snippet banser
                       await page.wait_for_timeout(1_000)
                       screenshot = await playwright_screenshot(element=banner)
                   html = await banner.evaluate("element => element.outerHTML")
+                  if shadow:
+                      html = await banner.evaluate("element => element.shadow.innerHTML")
                   source = Selector(html)
                   banners.append((screenshot, source, selector))
           return banners
@@ -642,34 +671,35 @@ snippet banser
                   yield item
 
       def parse_banners(self, response: HtmlResponse, keyword: str):
-          banners = response.meta["classic"]
-          yield from self.banner_builder(
-              banners=banners,
-              banner_type=BannerTypes.CLASSIC,
-              current_url=response.url,
-              keyword=keyword,
-          )
-          banners = response.meta["sponsored"]
-          yield from self.banner_builder(
-              banners=banners,
-              banner_type=BannerTypes.SPONSORED_PRODUCT,
-              current_url=response.url,
-              keyword=keyword,
-          )
-          banners = response.meta["showcase"]
-          yield from self.banner_builder(
-              banners=banners,
-              banner_type=BannerTypes.SHOWCASE,
-              current_url=response.url,
-              keyword=keyword,
-          )
-          banners = response.meta["slider"]
-          yield from self.banner_builder(
-              banners=banners,
-              banner_type=BannerTypes.CLASSIC,
-              current_url=response.url,
-              keyword=keyword,
-          )
+        banners = response.meta.get("classic", [])
+        yield from self.banner_builder(
+            banners=banners,
+            banner_type=BannerTypes.CLASSIC,
+            current_url=response.url,
+            keyword=keyword,
+        )
+        banners = response.meta.get("sponsored", [])
+        yield from self.banner_builder(
+            banners=banners,
+            banner_type=BannerTypes.SPONSORED_PRODUCT,
+            current_url=response.url,
+            keyword=keyword,
+        )
+        banners = response.meta.get("showcase", [])
+        yield from self.banner_builder(
+            banners=banners,
+            banner_type=BannerTypes.SHOWCASE,
+            current_url=response.url,
+            keyword=keyword,
+        )
+        banners = response.meta.get("slider", [])
+        yield from self.banner_builder(
+            banners=banners,
+            banner_type=BannerTypes.CLASSIC,
+            current_url=response.url,
+            keyword=keyword,
+        )
+
 
       def add_products(self, response: HtmlResponse, banner: ItemBannerSearch):
           products = []
@@ -677,14 +707,14 @@ snippet banser
               for m in matches:
                   product = ItemBannerProduct()
                   product["id"] = m.xpath("")
-                  product["detail_link"] = m.xpath("").get()
-                  product["image_link"] = m.xpath("").get()
+                  product["detail_link"] = m.xpath(".//@href").get()
+                  product["image_link"] = m.xpath(".//img/@src").get()
                   products.append(product)
           elif pdp_match := response.xpath(""):
               product = ItemBannerProduct()
               product["id"] = pdp_match.xpath("")
-              product["detail_link"] = pdp_match.xpath("").get()
-              product["image_link"] = pdp_match.xpath("").get()
+              product["detail_link"] = response.url
+              product["image_link"] = urljoin(self.domain, pdp_match.xpath(".//img/@src").get())
               products.append(product)
 
           banner["products"] = products or None
