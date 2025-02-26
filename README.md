@@ -35,3 +35,5 @@ ssh-add {SSH_KEY}
 
 - fix docker post-install permission issues
 - install and link uv python binaries
+- add flatpak
+- remove unecessary bloat only package managers and basic stuff tool will be installed only when needed
