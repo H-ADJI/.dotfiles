@@ -20,7 +20,7 @@
           - "jnv/jnv"
 
       - name: nvim
-        url: https://github.com/neovim/neovim/releases/download/nightly/nvim-linux64.tar.gz
+        url: https://github.com/neovim/neovim/releases/download/v0.10.4/nvim-linux-x86_64.tar.gz
         binaries_to_symlink:
           - "nvim/bin/nvim"
 
