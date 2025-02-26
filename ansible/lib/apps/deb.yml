@@ -30,6 +30,7 @@
         - wget
         - xclip
         - wl-clipboard
+        - scrcpy
         - git
         - sed
         - cmus
