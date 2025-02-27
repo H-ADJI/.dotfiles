@@ -33,6 +33,7 @@
         - scrcpy
         - git
         - sed
+        - audacity
         - cmus
         - mpv
         - unzip
