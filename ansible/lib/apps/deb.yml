@@ -38,7 +38,6 @@
         - cmus
         - mpv
         - unzip
-        - timeshift
         - zoxide
         - adb
         - stow
@@ -49,7 +48,6 @@
         - jq
         - bsdmainutils
         - build-essential
-        - neofetch
         - gcc
         - libsqlite3-dev
         - libssl-dev

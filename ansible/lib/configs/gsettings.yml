@@ -3,6 +3,6 @@
   become: true
   become_user: "{{ user }}"
   tasks:
-    - name: Download Docker installation script
+    - name: Setup gnome workspaces
       shell: |
         cat {{ home_dir }}/.dotfiles/gsettings/workspaces.sh | bash

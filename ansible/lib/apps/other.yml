@@ -99,7 +99,7 @@
         repo: "https://github.com/mroth/evalcache"
         dest: "{{ zsh_custom_path }}/plugins/evalcache"
 
-- name: Install Docker and configure non-root user access
+- name: Install Docker
   hosts: localhost
   become: true
   tasks:
