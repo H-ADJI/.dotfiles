@@ -63,6 +63,7 @@
         - python3-venv
         - python3-pip
         - uidmap
+        - obs-studio
 
 - name: Download and install multiple .deb packages using Nala
   hosts: localhost
