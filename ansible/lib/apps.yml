@@ -6,6 +6,3 @@
 
 - name: Include [OTHER] apps
   import_playbook: apps/other.yml
-
-# - name: Include [CARGO] binaries
-#   import_playbook: apps/cargo.yml

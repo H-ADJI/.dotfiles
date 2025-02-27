@@ -19,6 +19,7 @@
       loop:
         - applications
         - git
+        - leetcode
         - kitty
         - nvim
         - scripts

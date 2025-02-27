@@ -13,27 +13,24 @@
 sudo curl -SL https://raw.githubusercontent.com/H-ADJI/.dotfiles/master/install.sh | sh
 ```
 
-- initialize transcrypt using
+- Install zen browser via flatpak
+- Install sync browser profile
+- Initialize transcrypt using
 
 ```bash
 transcrypt -y -p {SUPER-SECURE-PASSWORD}
 ```
 
-- setup ssh key permission for ssh-agent using :
+- Setup ssh key permission for ssh-agent using :
 
 ```bash
-chmod 600 {SSH_KEY}
+chmod 600 {SSH_PRIVATE_KEY}
 ```
 
-- add ssh key to ssh-agent using
+- Add ssh key to ssh-agent using
 
 ```bash
-ssh-add {SSH_KEY}
+ssh-add {SSH_PRIVATE_KEY}
 ```
 
-## TODO
-
-- fix docker post-install permission issues
-- install and link uv python binaries
-- add flatpak
-- remove unecessary bloat only package managers and basic stuff tool will be installed only when needed
+- Apply docker post install setup [here](https://docs.docker.com/engine/install/linux-postinstall/)
