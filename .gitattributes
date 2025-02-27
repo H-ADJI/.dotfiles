@@ -1,4 +1,5 @@
 #pattern  filter=crypt diff=crypt merge=crypt
 secrets/* filter=crypt diff=crypt merge=crypt
+zsh/.zsh_history filter=crypt diff=crypt merge=crypt
 leetcode/.leetcode/leetcode.toml filter=crypt diff=crypt merge=crypt
 ssh/.ssh/* filter=crypt diff=crypt merge=crypt
