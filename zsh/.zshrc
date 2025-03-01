@@ -10,3 +10,7 @@ source ~/zsh/tmux.zsh
 source ~/zsh/zoxide.zsh
 source ~/zsh/uv.zsh
 source ~/zsh/leetcode.zsh
+
+fpath+=~/.zfunc; autoload -Uz compinit; compinit
+
+zstyle ':completion:*' menu select
