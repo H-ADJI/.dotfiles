@@ -32,6 +32,7 @@
         - wl-clipboard
         - scrcpy
         - flatpak
+        - gnome-software-plugin-flatpak
         - git
         - sed
         - audacity
