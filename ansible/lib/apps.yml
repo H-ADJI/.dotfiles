@@ -1,6 +1,9 @@
 - name: Include [DEB] apps
   import_playbook: apps/deb.yml
 
+- name: Include [flatpak] apps
+  import_playbook: apps/flatpak.yml
+
 - name: Include [PRE-Compiled] apps
   import_playbook: apps/pre_compiled.yml
 
