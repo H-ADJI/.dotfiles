@@ -1,0 +1,16 @@
+- name: Add flathub repo
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Add flathub repo
+      ansible.builtin.command:
+        cmd: flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+
+- name: Installing zeb browser from flathub repo
+  hosts: localhost
+  become: true
+  become_user: "{{ user }}"
+  tasks:
+    - name: Install utilities using Nala
+      ansible.builtin.command:
+        cmd: flatpak install flathub app.zen_browser.zen -y
