@@ -24,6 +24,7 @@ create_bootable_usb() {
   # Check if exactly two arguments are provided
   if [ "$#" -ne 2 ]; then
     echo "Usage: create_bootable_usb <path_to_iso> <device>"
+    echo "Use lsblk to list storage devices"
     return 1
   fi
 
