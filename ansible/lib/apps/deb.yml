@@ -55,7 +55,6 @@
         - libdbus-1-dev
         - ripgrep
         - direnv
-        - pipewire
         - fd-find
         - eza
         - btm

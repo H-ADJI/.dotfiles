@@ -1,0 +1,13 @@
+- name: Installing apps from the public Deb repo
+  hosts: localhost
+  become: true
+  tasks:
+    - name: Install audio server and utilities using Nala
+      ansible.builtin.command:
+        cmd: "nala install -y {{ item }}"
+      loop:
+        - gstreamer1.0-pipewire
+        - libpipewire-0.3-{0,dev,modules}
+        - libspa-0.2-{bluetooth,dev,jack,modules}
+        - pipewire{,-{audio-client-libraries,pulse,bin,jack,alsa,v4l2,tests}}
+        - helvum
