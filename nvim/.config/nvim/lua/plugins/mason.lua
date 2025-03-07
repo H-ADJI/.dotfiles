@@ -14,6 +14,7 @@ return {
       "templ",
       -- javascript
       "typescript-language-server",
+      "biome",
       "eslint-lsp",
       -- other stuff
       "clangd",

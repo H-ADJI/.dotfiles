@@ -12,7 +12,7 @@ return {
       sql = { "sql_formatter" },
       html = { "prettierd" },
       css = { "prettierd" },
-      json = { "prettierd" },
+      json = { "biome" },
       yaml = { "prettierd" },
       javascript = { "prettierd" },
       markdown = { "prettierd" },
