@@ -5,7 +5,7 @@ return {
       -- python stuff
       "pyright",
       "ruff",
-      "black",
+      -- "black",
       -- golang stuff
       "gopls",
       "iferr",

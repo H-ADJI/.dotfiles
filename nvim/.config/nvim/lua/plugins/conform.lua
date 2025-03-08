@@ -7,7 +7,7 @@ return {
   opts = {
     log_level = vim.log.levels.DEBUG,
     formatters_by_ft = {
-      python = { "black" },
+      python = { "ruff_format", "ruff_organize_imports", "ruff_fix" },
       go = { "gofmt", "golines", "goimports" },
       sql = { "sql_formatter" },
       html = { "prettierd" },
@@ -27,9 +27,9 @@ return {
         args = { "format", "$FILENAME" }, -- Adjust path to your SQL formatter config if needed
         stdin = true,
       },
-      black = {
-        prepend_args = { "-l", "120" },
-      },
+      -- black = {
+      --   prepend_args = { "-l", "120" },
+      -- },
       sql_formatter = {
         command = "sql-formatter",
         args = { "--config", ".sql-formatter.json" }, -- Adjust path to your SQL formatter config if needed
