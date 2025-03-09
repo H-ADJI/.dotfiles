@@ -20,6 +20,7 @@ return {
       "clangd",
       "htmx-lsp",
       "taplo",
+      "css-lsp",
       -- "sqlfluff",
       "sql-formatter",
       "dockerfile-language-server",
