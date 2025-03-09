@@ -29,6 +29,8 @@ return {
       "shellcheck",
       "shfmt",
       "stylua",
+      "bash-language-server",
+      "beautysh",
     },
   },
 }
