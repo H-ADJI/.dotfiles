@@ -27,8 +27,8 @@ return {
         args = { "format", "$FILENAME" }, -- Adjust path to your SQL formatter config if needed
         stdin = true,
       },
-      -- black = {
-      --   prepend_args = { "-l", "120" },
+      -- ruff_format = {
+      --   prepend_args = { "--config", "~/.config/ruff.toml" },
       -- },
       sql_formatter = {
         command = "sql-formatter",
