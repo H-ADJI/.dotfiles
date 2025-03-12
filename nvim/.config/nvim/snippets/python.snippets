@@ -19,7 +19,182 @@ snippet prx proxies list
   proxy = playwright_proxy = ["AWS_EU", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
   oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "$1"
   oxylabs_residential_continent = "$2"
+  tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
 
+snippet bansermobile
+  from scrapy.http import Request, TextResponse
+
+  from core.config import BannerTypes
+  from core.requests_di import JsonRequestDI
+  from core.spiders_fwk.json_spider import JsonSpider
+  from core.spiders_fwk.v4_spider import V4Spider
+  from items.banner_category import ItemBannerProduct
+  from items.banner_search import ItemBannerSearch
+  from spiders.$1 import $2
+  class BannerSearch(JsonSpider, V4Spider):
+      domain = $2.domain
+      retailer_id = $2.retailer_id
+      proxy = playwright_proxy = ["AWS_$3", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
+      oxylabs_residential_country = iproyal_residential_country = "$4"
+      oxylabs_dc_country = "$5"
+      tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
+      custom_settings = {
+        "HTTPCACHE_ENABLED": 1,
+        "SPIDER_MIDDLEWARES": {
+            "middlewares.pagination_position_middleware.PositionDefaultMiddleware": None,
+            "middlewares.image_downloading_middleware.ImageDownloadingDefaultMiddleware": 999,
+        },
+    }
+      keywords: list[tuple[str, str]]
+      custom_headers = {}
+
+      def start_requests(self):
+          for keyword, lower_keyword in self.keywords:
+              yield JsonRequestDI(
+                  url="",
+                  callback=self.parse_banners_search,
+                  method="POST",
+                  data={},
+                  headers=self.custom_headers,
+                  meta={"force_headers": self.custom_headers.keys()},
+                  cb_kwargs=dict(path=[""]),
+              )
+
+              yield Request(
+                  url="",
+                  callback=self.parse_banners_search,
+                  headers=self.custom_headers,
+                  meta={"force_headers": self.custom_headers.keys()},
+                  cb_kwargs=dict(path=[""]),
+              )
+
+      def parse_banners_search(self, response: TextResponse, path: list):
+          items = response.json[""]  # pyright: ignore
+          self.logger.info(f"got {len(items)} banners")
+          for banner in items:
+              item = ItemBannerSearch()
+              item["current_url"] = response.url
+              item["title"] = banner[""]
+              item["banner_type"] = BannerTypes.SPONSORED_PRODUCT
+              item["category"] = path
+              item["products"] = None
+              item["redirect_url"] = None
+              item["html_image"] = item["image_url"] = banner[""]
+              product = ItemBannerProduct()
+              product["id"] = product
+              product["image_link"] = ""
+              item["products"] = [product]
+              yield item
+               
+snippet bancatmobile
+  from urllib.parse import urljoin
+
+  from scrapy.http import Request, TextResponse
+
+  from core.config import BannerTypes
+  from core.requests_di import JsonRequestDI
+  from core.spiders_fwk.json_spider import JsonSpider
+  from core.spiders_fwk.v4_spider import V4Spider
+  from items.banner_category import ItemBannerCategory, ItemBannerProduct
+  from spiders.$1 import $2
+  class BannerCategory(JsonSpider, V4Spider):
+      domain = $2.domain
+      retailer_id = $2.retailer_id
+      proxy = playwright_proxy = ["AWS_$3", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
+      oxylabs_residential_country = iproyal_residential_country = "$4"
+      oxylabs_dc_country = "$5"
+      tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
+      custom_settings = {
+        "HTTPCACHE_ENABLED": 1,
+        "SPIDER_MIDDLEWARES": {
+            "middlewares.pagination_position_middleware.PositionDefaultMiddleware": None,
+            "middlewares.image_downloading_middleware.ImageDownloadingDefaultMiddleware": 999,
+        },
+    }
+      custom_headers = {}
+
+      def start_requests(self):
+          yield JsonRequestDI(
+              url="",
+              callback=self.parse_home_banners,
+              method="POST",
+              data={},
+              headers=self.custom_headers,
+              meta={"force_headers": self.custom_headers.keys()},
+              cb_kwargs=dict(path=[""]),
+          )
+
+          yield Request(
+              url="",
+              callback=self.parse_banners_category,
+              headers=self.custom_headers,
+              meta={"force_headers": self.custom_headers.keys()},
+              cb_kwargs=dict(path=[""]),
+          )
+
+      def parse_home_banners(self, response: TextResponse):
+          items = response.json[""]  # pyright: ignore
+          self.logger.info(f"got {len(items)} banners")
+          for banner in items:
+              item = ItemBannerCategory()
+              item["current_url"] = response.url
+              item["title"] = banner[""]
+              item["banner_type"] = BannerTypes.SLIDER_HOME_PAGE
+              item["category"] = ["Home"]
+              item["products"] = None
+              item["redirect_url"] = None
+              item["html_image"] = item["image_url"] = banner[""]
+              if False:
+                  item["redirect_url"] = urljoin(
+                      self.domain,
+                      banner[""],
+                  )
+                  yield Request(
+                      item["redirect_url"],
+                      callback=self.add_products,
+                      headers=self.custom_headers,
+                      meta={"force_headers": self.custom_headers.keys()},
+                      cb_kwargs=dict(banner=item),
+                  )
+              else:
+                  yield item
+
+      def parse_banners_category(self, response: TextResponse, path: list):
+          items = response.json[""]  # pyright: ignore
+          self.logger.info(f"got {len(items)} banners")
+          for banner in items:
+              item = ItemBannerCategory()
+              item["current_url"] = response.url
+              item["title"] = banner[""]
+              item["banner_type"] = BannerTypes.SLIDER_HOME_PAGE
+              item["category"] = path
+              item["products"] = None
+              item["redirect_url"] = None
+              item["html_image"] = item["image_url"] = banner[""]
+              if False:
+                  item["redirect_url"] = urljoin(
+                      self.domain,
+                      banner[""],
+                  )
+                  yield Request(
+                      item["redirect_url"],
+                      callback=self.add_products,
+                      headers=self.custom_headers,
+                      meta={"force_headers": self.custom_headers.keys()},
+                      cb_kwargs=dict(banner=item),
+                  )
+              else:
+                  yield item
+
+      def add_products(self, response: TextResponse, banner: ItemBannerCategory):
+          products = []
+          for product in response.json[""]:  # pyright: ignore
+              item = ItemBannerProduct()
+              item["id"] = product
+              item["image_link"] = ""
+              products.append(item)
+          banner["products"] = None or products
+          yield banner
 snippet bancat
   import random
   from urllib.parse import urljoin
@@ -43,7 +218,7 @@ snippet bancat
       oxylabs_residential_country = iproyal_residential_country = "$4"
       oxylabs_dc_country = "$5"
       playwright_nb_tabs = 2
-      browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
+      tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       playwright_disable_webrtc = True
       playwright_allow_images = True
       playwright_visible = True
@@ -286,7 +461,7 @@ snippet bancatms
       oxylabs_residential_country = iproyal_residential_country = "$4"
       oxylabs_dc_country = "$5"
       playwright_nb_tabs = 2
-      browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
+      tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       playwright_disable_webrtc = True
       playwright_allow_images = True
       playwright_visible = True
@@ -532,7 +707,7 @@ snippet banser
       retailer_id = $2.retailer_id
       proxy = playwright_proxy = ["AWS_US", "AWS_EU", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
       oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "SK"
-      browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
+      tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       playwright_nb_tabs = 2
       playwright_disable_webrtc = True
       playwright_allow_images = True
