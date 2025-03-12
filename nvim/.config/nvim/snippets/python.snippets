@@ -39,7 +39,6 @@ snippet bansermobile
       oxylabs_dc_country = "$5"
       tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       custom_settings = {
-        "HTTPCACHE_ENABLED": 1,
         "SPIDER_MIDDLEWARES": {
             "middlewares.pagination_position_middleware.PositionDefaultMiddleware": None,
             "middlewares.image_downloading_middleware.ImageDownloadingDefaultMiddleware": 999,
@@ -65,10 +64,10 @@ snippet bansermobile
                   callback=self.parse_banners_search,
                   headers=self.custom_headers,
                   meta={"force_headers": self.custom_headers.keys()},
-                  cb_kwargs=dict(path=[""]),
+                  cb_kwargs=dict(keyword=keyword),
               )
 
-      def parse_banners_search(self, response: TextResponse, path: list):
+      def parse_banners_search(self, response: TextResponse, keyword: list):
           items = response.json[""]  # pyright: ignore
           self.logger.info(f"got {len(items)} banners")
           for banner in items:
@@ -76,7 +75,7 @@ snippet bansermobile
               item["current_url"] = response.url
               item["title"] = banner[""]
               item["banner_type"] = BannerTypes.SPONSORED_PRODUCT
-              item["category"] = path
+              item["category"] = keyword
               item["products"] = None
               item["redirect_url"] = None
               item["html_image"] = item["image_url"] = banner[""]
