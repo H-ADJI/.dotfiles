@@ -13,7 +13,7 @@ LOCAL_REPO_DIR="/tmp/ansible-setup"
 
 echo "Cloning the repository from $GIT_REPO_URL..."
 if [ -d "$LOCAL_REPO_DIR" ]; then
-  rm -rf "$LOCAL_REPO_DIR"
+    rm -rf "$LOCAL_REPO_DIR"
 fi
 git clone --depth=1 "$GIT_REPO_URL" "$LOCAL_REPO_DIR"
 
@@ -21,13 +21,12 @@ git clone --depth=1 "$GIT_REPO_URL" "$LOCAL_REPO_DIR"
 ANSIBLE_PLAYBOOK="$LOCAL_REPO_DIR/ansible/main.yml"
 echo "Running the Ansible playbook..."
 if [ -f "$ANSIBLE_PLAYBOOK" ]; then
-  ansible-playbook "$ANSIBLE_PLAYBOOK"
+    ansible-playbook "$ANSIBLE_PLAYBOOK"
 else
-  echo "Error: Ansible playbook not found at $ANSIBLE_PLAYBOOK"
-  exit 1
+    echo "Error: Ansible playbook not found at $ANSIBLE_PLAYBOOK"
+    exit 1
 fi
 # Clean up the cloned repository (optional)
 echo "Cleaning up..."
 rm -rf "$LOCAL_REPO_DIR"
-
 echo "Setup completed successfully!"
