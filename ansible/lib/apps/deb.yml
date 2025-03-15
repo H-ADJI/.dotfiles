@@ -37,6 +37,7 @@
         - sed
         - audacity
         - cmus
+        - gh
         - mpv
         - unzip
         - zoxide
