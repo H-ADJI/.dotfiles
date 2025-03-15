@@ -2,7 +2,7 @@
   import_playbook: apps/deb.yml
 
 - name: Include [AUDIO-ENG] apps
-  import_playbook: apps/audio_engeeineering.yml
+  import_playbook: apps/audio_engineering.yml
 
 - name: Include [flatpak] apps
   import_playbook: apps/flatpak.yml
