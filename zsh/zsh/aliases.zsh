@@ -26,3 +26,5 @@ alias lc="leetcode"
 alias spotdl="docker run --rm -v ~/Music:/music spotdl/spotify-downloader download"
 alias gclean="git clean -f"
 alias telescope_clear_cache="rm ~/.local/state/nvim/shada/main.shada"
+alias update='sudo nala update && sudo nala upgrade -y && sudo nala autoremove -y'
+
