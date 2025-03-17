@@ -1,5 +1,3 @@
-#!/bin/zsh
-
 shub_deploy() {
     shub image upload $SHUB_DEVZONE --build-arg PYPI_SECRET=$PYPI_SECRET
 }
@@ -59,7 +57,7 @@ docker_spider() {
 
     docker image build -t test_docker_spider --build-arg PYPI_SECRET=$PYPI_SECRET .
     docker container run --cpus=$UNITS --memory="$MEMORY" \
-        --env-file .env --env V4_PROXIES=$V4_PROXIES \
+        --env-file .env --env V4_PROXIES="$V4_PROXIES" \
         --env GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES=$GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES \
         --env GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
         test_docker_spider scrapy crawl $SPIDER_NAME $EXTRA_ARGS

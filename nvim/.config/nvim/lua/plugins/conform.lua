@@ -18,8 +18,8 @@ return {
       markdown = { "prettierd" },
       scss = { "prettierd" },
       sh = { "shfmt", "beautysh" },
-      zsh = { "shfmt", "beautysh" },
-      bash = { "shfmt", "beautysh" },
+      zsh = { "beautysh" },
+      bash = { "beautysh" },
     },
     formatters = {
       kdlfmt = {
