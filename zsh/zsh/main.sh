@@ -28,17 +28,6 @@ source ~/zsh/lib/zoxide.sh
 source ~/zsh/lib/zsh.sh
 source ~/zsh/lib/keybinds.sh
 source ~/zsh/lib/history.sh
-# # history
-# HISTSIZE=5000
-# SAVEHIST=$HISTSIZE
-# HISTFILE=~/.zsh_history
-# HISTDUP=erase
-# setopt appendhistory
-# setopt sharehistory
-# setopt hist_ignore_all_dups
-# setopt hist_save_no_dups
-# setopt hist_ignore_dups
-# setopt hist_find_no_dups
 #
 # # completion case insensitive
 # zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-Z}'
@@ -76,12 +65,6 @@ source ~/zsh/lib/history.sh
 # setopt hist_ignore_dups
 # setopt hist_find_no_dups
 
-# Completion styling
-# zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-# zstyle ':completion:*' list-colors "${(s.:.)LS_COLORS}"
-# zstyle ':completion:*' menu no
-# zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
-# zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 
 # Shell integrations
 # eval "$(fzf --zsh)"
