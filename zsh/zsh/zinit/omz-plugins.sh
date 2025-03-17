@@ -1,3 +1,6 @@
+# add git function library https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
+zinit snippet OMZL::git.zsh
+
 # usefull git aliases and function https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git
 zinit snippet OMZP::git
 
