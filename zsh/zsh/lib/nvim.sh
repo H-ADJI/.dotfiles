@@ -7,7 +7,10 @@ alias nvconfig="cd ~/.config/nvim && nv"
 alias telescope_clear_cache="rm ~/.local/state/nvim/shada/main.shada"
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
-    export EDITOR='vim'
+    export EDITOR="vim"
 else
     export EDITOR="nvim"
 fi
+export SUDO_EDITOR="nvim"
+export VISUAL="nvim"
+export FCEDIT="nvim"
