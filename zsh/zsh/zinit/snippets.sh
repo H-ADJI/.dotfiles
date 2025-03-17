@@ -40,7 +40,6 @@ zinit snippet OMZP::command-not-found
 # tmux aliases and settings https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
 zinit snippet OMZP::tmux
 
-# TODO: lookup how completions work
 # uv aliases and completions https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/uv
 zinit snippet OMZP::uv
 # docker aliases and completions https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker

@@ -6,4 +6,6 @@ alias q="exit"
 alias ..="cd .."
 alias mkdir="mkdir -pv"
 alias grep="grep --color=auto"
-
+alias copy="wl-copy"
+alias cpy="wl-copy"
+alias pst="wl-paste"
