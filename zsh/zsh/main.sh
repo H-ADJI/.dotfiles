@@ -12,6 +12,8 @@ source ~/zsh/lib/fzf.sh
 source ~/zsh/lib/fzf-git.sh
 source ~/zsh/lib/git.sh
 source ~/zsh/lib/go.sh
+source ~/zsh/lib/history.sh
+source ~/zsh/lib/keybinds.sh
 source ~/zsh/lib/kitty.sh
 source ~/zsh/lib/leetcode.sh
 source ~/zsh/lib/nala.sh
@@ -26,7 +28,5 @@ source ~/zsh/lib/utils.sh
 source ~/zsh/lib/uv.sh
 source ~/zsh/lib/zoxide.sh
 source ~/zsh/lib/zsh.sh
-source ~/zsh/lib/keybinds.sh
-source ~/zsh/lib/history.sh
 
 zinit cdreplay -q
