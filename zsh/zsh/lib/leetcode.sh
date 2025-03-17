@@ -15,4 +15,4 @@ fzf_leetcode_problems() {
 }
 # Define the widget and bind it to Ctrl+f
 zle -N fzf_leetcode_problems
-bindkey '^n' fzf_leetcode_problems
+bindkey '^x^l' fzf_leetcode_problems

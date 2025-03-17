@@ -1,33 +1,27 @@
-shub_deploy() {
-    shub image upload $SHUB_DEVZONE --build-arg PYPI_SECRET=$PYPI_SECRET
+SPIDERS_CACHE_DIR="$HOME/.local/share/scrapy"
+[ ! -d "$SPIDERS_CACHE_DIR" ] && mkdir -p "$SPIDERS_CACHE_DIR"
+cache_file="$SPIDERS_CACHE_DIR/spiders.cache"
+alias show_spiders_list="bat ~/.local/share/scrapy/spiders.cache 2>/dev/null"
+alias delete_spiders_list="rm ~/.local/share/scrapy/spiders.cache"
+load_spiders_list() {
+    touch "$cache_file"
+    if command -v scrapy &>/dev/null; then
+        scrapy list 2>/dev/null 1>"$cache_file"
+    else
+        print -P "\n%F{yellow} Couldn't generate spiders cache, $(pwd) is not a scrapy project%f"
+        return 1
+    fi
 }
-# to persist spiders list, may cause inconsistencies
-PERSIST_SPIDERS=1
-
 fzf_spiders() {
     # Run FZF with a custom appearance
-    cache_dir="$HOME/.local/share/scrapy"
-    cache_file="/tmp/spiders.tmp"
-
-    if [ $PERSIST_SPIDERS -eq 1 ]; then
-        mkdir -p $cache_dir
-        cache_file="$cache_dir/scrapy"
-    fi
-
-    if command -v scrapy &>/dev/null; then
-        touch $cache_file
-        scrapy list 2>/dev/null 1>$cache_file
-    else
-        print -P "\n%F{yellow}Using cached spider list (Last update: $(date -r "$cache_file" '+%m-%d-%Y %H:%M:%S' 2>/dev/null))%f"
-    fi
-
-    zle redisplay
-    local spider=$(
-        cat $cache_file 2>/dev/null | fzf --height 40% --layout=reverse \
+    print -P "\n%F{yellow}Using cached spider list (Last update: $(date -r "$cache_file" '+%m-%d-%Y %H:%M:%S' 2>/dev/null))%f"
+    # zle redisplay
+    local spider
+    spider=$(
+        fzf --height 40% --layout=reverse \
             --border --prompt="Select Spider: " --pointer="▶ " --marker="✔ " \
-            --preview="echo 'Spider: {}'" --preview-window=down:1:wrap
+            --preview="echo 'Spider: {}'" --preview-window=down:1:wrap <"$cache_file"
     )
-
     # Insert the selected spider name into the command line
     if [ -n "$spider" ]; then
         LBUFFER="${LBUFFER}${spider} "
@@ -36,8 +30,16 @@ fzf_spiders() {
 }
 # Define the widget and bind it to Ctrl+f
 zle -N fzf_spiders
-bindkey '^f' fzf_spiders
+bindkey '^x^f' fzf_spiders
 
+shub_deploy() {
+    shub image upload "$SHUB_DEVZONE" --build-arg PYPI_SECRET="$PYPI_SECRET"
+    zle redisplay
+}
+zle -N shub_deploy
+bindkey '^x^u' shub_deploy
+
+# running a spider inside docker
 docker_spider() {
     if [ $# -lt 2 ]; then
         echo "Usage: $0 <units> <spider_name> [any additional scrapy args]"
@@ -55,11 +57,11 @@ docker_spider() {
     # Run the container with the specified resources
     echo "Running spider '$SPIDER_NAME' with $UNITS unit(s) ($MEMORY RAM, $CPUS CPU)..."
 
-    docker image build -t test_docker_spider --build-arg PYPI_SECRET=$PYPI_SECRET .
-    docker container run --cpus=$UNITS --memory="$MEMORY" \
+    docker image build -t test_docker_spider --build-arg PYPI_SECRET="$PYPI_SECRET" .
+    docker container run --cpus="$UNITS" --memory="$MEMORY" \
         --env-file .env --env V4_PROXIES="$V4_PROXIES" \
-        --env GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES=$GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES \
-        --env GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
-        test_docker_spider scrapy crawl $SPIDER_NAME $EXTRA_ARGS
+        --env GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES="$GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES" \
+        --env GOOGLE_APPLICATION_CREDENTIALS="$GOOGLE_APPLICATION_CREDENTIALS" \
+        test_docker_spider scrapy crawl "$SPIDER_NAME" "$EXTRA_ARGS"
 
 }
