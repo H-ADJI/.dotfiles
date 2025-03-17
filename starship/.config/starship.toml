@@ -18,13 +18,13 @@ $cmd_duration\
 $line_break\
 $character"""
 # move the rest of the prompt to the right
-# right_format = """$all"""
+right_format = """$all"""
 [fill]
-symbol = ' - '
+symbol = ' '
 [directory]
-style = 'bold fg:flamingo'
+style = 'bold fg:lavender'
 format = '[$path ]($style)'
-truncation_length = 3
+truncation_length = 5
 truncation_symbol = '…/'
 truncate_to_repo = false
 [directory.substitutions]
@@ -34,17 +34,25 @@ truncate_to_repo = false
 'Pictures' = ' '
 
 [git_branch]
-style = 'fg:green'
+style = 'fg:sapphire'
 symbol = ' '
-format = '[on](white) [$symbol$branch ]($style)'
+format = '[->](pink) [$symbol$branch ]($style)'
 
 [git_status]
-style = 'fg:green'
-format = '([$all_status$ahead_behind]($style) )'
-
+style = 'fg:red'
+conflicted = '🏳'
+ahead = '🏎💨'
+behind = '😰'
+diverged = '😵'
+up_to_date = '✓'
+# untracked = '🤷'
+stashed = '📦'
+modified = '📝[\($count\)](red)'
+untracked = '🤷[\($count\)](red)'
+format = '([$untracked$modified]())'
 
 [python]
-style = 'teal'
+style = 'yellow bold'
 symbol = ' '
 format = '[${symbol}${pyenv_prefix}(${version} )(\($virtualenv\) )]($style)'
 
