@@ -14,3 +14,4 @@ fi
 export SUDO_EDITOR="nvim"
 export VISUAL="nvim"
 export FCEDIT="nvim"
+alias e=$EDITOR

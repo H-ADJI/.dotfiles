@@ -23,6 +23,7 @@ source ~/zsh/lib/path.sh
 source ~/zsh/lib/python.sh
 source ~/zsh/lib/rust.sh
 source ~/zsh/lib/scrapy.sh
+source ~/zsh/lib/tmux.sh
 source ~/zsh/lib/tmuxifier.sh
 source ~/zsh/lib/utils.sh
 source ~/zsh/lib/uv.sh

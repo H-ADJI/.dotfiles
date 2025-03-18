@@ -424,7 +424,7 @@ snippet bancat
               for m in matches:
                   product = ItemBannerProduct()
                   product["id"] = m.xpath("")
-                  product["detail_link"] = m.xpath(".//@href").get()
+                  product["detail_link"] = urljoin(self.domain,m.xpath(".//@href").get())
                   product["image_link"] = m.xpath(".//img/@src").get()
                   products.append(product)
           elif pdp_match := response.xpath(""):
@@ -671,7 +671,7 @@ snippet bancatms
               for m in matches:
                   product = ItemBannerProduct()
                   product["id"] = m.xpath("")
-                  product["detail_link"] = m.xpath(".//@href").get()
+                  product["detail_link"] = urljoin(self.domain,m.xpath(".//@href").get())
                   product["image_link"] = m.xpath(".//img/@src").get()
                   products.append(product)
           elif pdp_match := response.xpath(""):
@@ -881,7 +881,7 @@ snippet banser
               for m in matches:
                   product = ItemBannerProduct()
                   product["id"] = m.xpath("")
-                  product["detail_link"] = m.xpath(".//@href").get()
+                  product["detail_link"] = urljoin(self.domain,m.xpath(".//@href").get())
                   product["image_link"] = m.xpath(".//img/@src").get()
                   products.append(product)
           elif pdp_match := response.xpath(""):
