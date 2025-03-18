@@ -37,9 +37,6 @@ zinit snippet "OMZP::node"
 # suggest package to be installed if command not found
 zinit snippet OMZP::command-not-found
 
-# tmux aliases and settings https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/tmux
-zinit snippet OMZP::tmux
-
 # uv aliases and completions https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/uv
 zinit snippet OMZP::uv
 # docker aliases and completions https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/docker
