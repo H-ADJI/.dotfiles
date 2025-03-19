@@ -117,10 +117,9 @@ output DP-2 {
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
-    bindsym $mod+s layout stacking
+    # bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
-
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
 
@@ -175,6 +174,28 @@ input "type:keyboard" {
     xkb_options caps:escape
 }
 # screenshot
+#
+### Screenshot mode:
+#
+set {
+  $screenshot "Screenshot: [S]creen or [R]egion"
+
+  $screenshot-cmd ~/.config/sway/screenshot.sh
+}
+
+mode $screenshot {
+  bindsym --to-code {
+    s mode "default", exec $screenshot-cmd screen
+    # w mode "default", exec $screenshot-cmd window broken option
+    r mode "default", exec $screenshot-cmd region 
+
+    Return mode "default"
+    Escape mode "default"
+    $mod+x mode "default"
+  }
+}
+
+bindsym --to-code $mod+s mode $screenshot
 bindsym Shift+F8 exec "grimshot save area"
 bindsym F8  exec "grimshot copy area"
 #
