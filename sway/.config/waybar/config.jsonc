@@ -12,7 +12,7 @@
                       "tray",
                       "custom/lock",
                       "custom/power"],
-    "wlr/workspaces": {
+    "sway/workspaces": {
          "disable-scroll": true,
          "sort-by-name": true,
          "format": " {icon} ",
