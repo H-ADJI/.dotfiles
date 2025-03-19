@@ -42,6 +42,8 @@
 #battery,
 #pulseaudio,
 #custom-lock,
+#cpu,
+#memory,
 #custom-power {
   background-color: @surface0;
   padding: 0.5rem 1rem;

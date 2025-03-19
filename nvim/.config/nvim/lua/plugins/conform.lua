@@ -13,6 +13,7 @@ return {
       html = { "prettierd" },
       css = { "prettierd" },
       json = { "biome" },
+      jsonc = { "biome" },
       yaml = { "prettierd" },
       javascript = { "prettierd" },
       markdown = { "prettierd" },
