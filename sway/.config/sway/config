@@ -180,6 +180,10 @@ bindsym F8  exec "grimshot copy area"
 #
 bindsym $mod+c exec clipman pick -t wofi
 
+bindsym $mod+g gaps inner all plus 10
+bindsym $mod+Shift+g gaps inner all minus 10
+bindsym $mod+Control+g gaps outer all plus 10
+bindsym $mod+Control+Shift+g gaps outer all minus 10
 # volume controls
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ 
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%-
@@ -216,9 +220,19 @@ exec_always {
 }
 # border around window
 default_border pixel 3
+# cursor style
+seat seat0 xcursor_theme "oreo_purple_cursors" 36
 # gap between windows
-gaps inner 20
-# coloring focused window
-client.focused #4c7899 #285577 #ffffff #2e9ef4 #01fd1b
+gaps inner 10
+# gaps outer 10
+# coloring focused window 
+# TODO: change colors
+#
+# class                 border  backgr. text    indicator child_border
+client.focused          #6272a4 #285577 #ffffff #2e9ef4   #6272a4 
+client.focused_inactive #282a36 #5f676a #ffffff #484e50   #282a36
+client.unfocused        #282a36 #222222 #888888 #292d2e   #282a36
+client.urgent           #282a36 #900000 #ffffff #900000   #282a36
+client.placeholder      #282a36 #0c0c0c #ffffff #000000   #282a36 
 
 include /etc/sway/config.d/*
