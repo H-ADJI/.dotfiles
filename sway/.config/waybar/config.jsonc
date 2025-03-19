@@ -7,6 +7,7 @@
 		"pulseaudio",
 		"cpu",
 		"memory",
+		"network",
 		"clock",
 		"tray",
 		"custom/lock",
@@ -82,5 +83,16 @@
 		"tooltip": false,
 		"on-click": "wlogout &",
 		"format": "襤"
+	},
+	"network": {
+		"format": "{ifname}",
+		"format-wifi": "Connected ",
+		"format-ethernet": "{ipaddr}/{cidr} 󰈀",
+		"format-disconnected": "Disconnected 󱛅",
+		"tooltip-format": "{ifname} via {gwaddr} 󰛳",
+		"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
+		"tooltip-format-ethernet": "{ifname} ",
+		"tooltip-format-disconnected": "Disconnected",
+		"max-length": 50
 	}
 }
