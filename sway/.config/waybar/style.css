@@ -56,6 +56,12 @@
   margin-right: 1rem;
 }
 
+#memory {
+  color: @peach;
+}
+#cpu {
+  color: @yellow;
+}
 #battery {
   color: @green;
 }
