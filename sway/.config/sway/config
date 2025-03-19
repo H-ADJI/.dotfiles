@@ -194,11 +194,8 @@ mode $screenshot {
     $mod+x mode "default"
   }
 }
-
 bindsym --to-code $mod+s mode $screenshot
-bindsym Shift+F8 exec "grimshot save area"
-bindsym F8  exec "grimshot copy area"
-#
+# clipboard menu
 bindsym $mod+c exec clipman pick -t wofi
 
 bindsym $mod+g gaps inner all plus 10
