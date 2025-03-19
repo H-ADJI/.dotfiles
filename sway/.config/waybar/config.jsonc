@@ -5,10 +5,10 @@
 	"modules-center": ["custom/music"],
 	"modules-right": [
 		"pulseaudio",
+		"clock",
 		"cpu",
 		"memory",
 		"network",
-		"clock",
 		"tray",
 		"custom/lock",
 		"custom/power"
@@ -36,9 +36,10 @@
 	},
 	"clock": {
 		"timezone": "Europe/Paris",
-		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-		"format-alt": " {:%d/%m/%Y}",
-		"format": " {:%H:%M}"
+		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
+		"format": "{: %I:%M %p   %d/%m/%Y}",
+		"format-alt": " {:%d/%m/%Y}"
+		// "format": " {:%H:%M}"
 	},
 	"backlight": {
 		"device": "intel_backlight",

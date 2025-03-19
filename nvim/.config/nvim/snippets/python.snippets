@@ -30,13 +30,12 @@ snippet bansermobile
   from core.spiders_fwk.v4_spider import V4Spider
   from items.banner_category import ItemBannerProduct
   from items.banner_search import ItemBannerSearch
-  from spiders.$1 import $2
+  from spiders.$1.base import $2
   class BannerSearch(JsonSpider, V4Spider):
       domain = $2.domain
       retailer_id = $2.retailer_id
-      proxy = playwright_proxy = ["AWS_$3", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
-      oxylabs_residential_country = iproyal_residential_country = "$4"
-      oxylabs_dc_country = "$5"
+      proxy = playwright_proxy = ["AWS_US", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
+      oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "$3"
       tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       custom_settings = {
         "SPIDER_MIDDLEWARES": {
@@ -85,6 +84,16 @@ snippet bansermobile
               item["products"] = [product]
               yield item
                
+      def add_products(self, response: TextResponse, banner: ItemBannerSearch):
+          products = []
+          for product in response.json[""]:  # pyright: ignore
+              item = ItemBannerProduct()
+              item["id"] = product
+              item["image_link"] = ""
+              products.append(item)
+          banner["products"] = None or products
+          yield banner
+
 snippet bancatmobile
   from urllib.parse import urljoin
 
@@ -95,13 +104,12 @@ snippet bancatmobile
   from core.spiders_fwk.json_spider import JsonSpider
   from core.spiders_fwk.v4_spider import V4Spider
   from items.banner_category import ItemBannerCategory, ItemBannerProduct
-  from spiders.$1 import $2
+  from spiders.$1.base import $2
   class BannerCategory(JsonSpider, V4Spider):
       domain = $2.domain
       retailer_id = $2.retailer_id
-      proxy = playwright_proxy = ["AWS_$3", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
-      oxylabs_residential_country = iproyal_residential_country = "$4"
-      oxylabs_dc_country = "$5"
+      proxy = playwright_proxy = ["AWS_US", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
+      oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "$3"
       tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       custom_settings = {
         "HTTPCACHE_ENABLED": 1,
@@ -194,6 +202,7 @@ snippet bancatmobile
               products.append(item)
           banner["products"] = None or products
           yield banner
+
 snippet bancat
   import random
   from urllib.parse import urljoin
@@ -206,16 +215,15 @@ snippet bancat
   from playwright.async_api import Page
   from scrapy.http import HtmlResponse
   from core.spiders_fwk.playwright_spider import PlaywrightSpider
-  from spiders.$1 import $2
+  from spiders.$1.base import $2
   from tools.banner_utils import BucketImage, playwright_screenshot
 
 
   class BannerCategory(PlaywrightSpider, V4Spider):
       domain = $2.domain
       retailer_id = $2.retailer_id
-      proxy = playwright_proxy = ["AWS_$3", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
-      oxylabs_residential_country = iproyal_residential_country = "$4"
-      oxylabs_dc_country = "$5"
+      proxy = playwright_proxy = ["AWS_US", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
+      oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "$3"
       playwright_nb_tabs = 2
       tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       playwright_disable_webrtc = True
@@ -353,6 +361,15 @@ snippet bancat
                 or src.xpath("./@href").get("")
             )
               if banner_type == BannerTypes.SPONSORED_PRODUCT or banner_type == BannerTypes.SHOWCASE:
+                  products = []
+                  for el in src.xpath(""):
+                      product = ItemBannerProduct()
+                      product["id"] = el.xpath("").get("")
+                      product["detail_link"] = urljoin(self.domain, el.xpath(".//@href").get())
+                      product["image_link"] = el.xpath(".//img/@src").get()
+                      products.append(product)
+                  item["products"] = products or None
+                  item["redirect_url"] = urljoin(self.domain, redirect_url)
                   yield item
               elif redirect_url:
                   item["redirect_url"] = urljoin(self.domain, redirect_url)
@@ -419,23 +436,15 @@ snippet bancat
               )
 
       def add_products(self, response: HtmlResponse, banner: ItemBannerCategory):
-          products = []
-          if matches := response.xpath(""):
-              for m in matches:
-                  product = ItemBannerProduct()
-                  product["id"] = m.xpath("")
-                  product["detail_link"] = urljoin(self.domain,m.xpath(".//@href").get())
-                  product["image_link"] = m.xpath(".//img/@src").get()
-                  products.append(product)
-          elif pdp_match := response.xpath(""):
-              product = ItemBannerProduct()
-              product["id"] = pdp_match.xpath("")
-              product["detail_link"] = response.url
-              product["image_link"] = urljoin(self.domain, pdp_match.xpath(".//img/@src").get())
-              products.append(product)
-
-          banner["products"] = products or None
-          yield banner
+        products = []
+        for el in response.xpath(""):
+            product = ItemBannerProduct()
+            product["id"] = el.xpath("").get("")
+            product["detail_link"] = urljoin(self.domain, el.xpath(".//@href").get())
+            product["image_link"] = el.xpath(".//img/@src").get()
+            products.append(product)
+        banner["products"] = products or None
+        yield banner
 
 snippet bancatms
   import random
@@ -449,16 +458,15 @@ snippet bancatms
   from playwright.async_api import Page
   from scrapy.http import HtmlResponse
   from core.spiders_fwk.playwright_spider import PlaywrightSpider
-  from spiders.$1 import $2
+  from spiders.$1.base import $2
   from tools.banner_utils import BucketImage, playwright_screenshot
 
 
   class BannerCategory(PlaywrightSpider, V4Spider):
       domain = $2.domain
       retailer_id = $2.retailer_id
-      proxy = playwright_proxy = ["AWS_$3", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
-      oxylabs_residential_country = iproyal_residential_country = "$4"
-      oxylabs_dc_country = "$5"
+      proxy = playwright_proxy = ["AWS_US", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
+      oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "$3"
       playwright_nb_tabs = 2
       tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       playwright_disable_webrtc = True
@@ -600,6 +608,15 @@ snippet bancatms
                 or src.xpath("./@href").get("")
             )
               if banner_type == BannerTypes.SPONSORED_PRODUCT or banner_type == BannerTypes.SHOWCASE:
+                  products = []
+                  for el in src.xpath(""):
+                      product = ItemBannerProduct()
+                      product["id"] = el.xpath("").get("")
+                      product["detail_link"] = urljoin(self.domain, el.xpath(".//@href").get())
+                      product["image_link"] = el.xpath(".//img/@src").get()
+                      products.append(product)
+                  item["products"] = products or None
+                  item["redirect_url"] = urljoin(self.domain, redirect_url)
                   yield item
               elif redirect_url:
                   item["redirect_url"] = urljoin(self.domain, redirect_url)
@@ -666,23 +683,15 @@ snippet bancatms
               )
 
       def add_products(self, response: HtmlResponse, banner: ItemBannerCategory):
-          products = []
-          if matches := response.xpath(""):
-              for m in matches:
-                  product = ItemBannerProduct()
-                  product["id"] = m.xpath("")
-                  product["detail_link"] = urljoin(self.domain,m.xpath(".//@href").get())
-                  product["image_link"] = m.xpath(".//img/@src").get()
-                  products.append(product)
-          elif pdp_match := response.xpath(""):
-              product = ItemBannerProduct()
-              product["id"] = pdp_match.xpath("")
-              product["detail_link"] = response.url
-              product["image_link"] = urljoin(self.domain, pdp_match.xpath(".//img/@src").get())
-              products.append(product)
-
-          banner["products"] = products or None
-          yield banner
+        products = []
+        for el in response.xpath(""):
+            product = ItemBannerProduct()
+            product["id"] = el.xpath("").get("")
+            product["detail_link"] = urljoin(self.domain, el.xpath(".//@href").get())
+            product["image_link"] = el.xpath(".//img/@src").get()
+            products.append(product)
+        banner["products"] = products or None
+        yield banner
 
 snippet banser
   import random
@@ -697,7 +706,7 @@ snippet banser
   from parsel import Selector
   from playwright.async_api import Page
   from scrapy.http import HtmlResponse
-  from spiders.$1 import $2
+  from spiders.$1.base import $2
   from tools.banner_utils import BucketImage, playwright_screenshot
 
 
@@ -705,7 +714,7 @@ snippet banser
       domain = $2.domain
       retailer_id = $2.retailer_id
       proxy = playwright_proxy = ["AWS_US", "AWS_EU", "IPROYAL_RESIDENTIAL", "OXYLABS_DC", "OXYLABS_RESIDENTIAL"]
-      oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "SK"
+      oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "$3"
       tls = browser = ["chrome/124", "chrome/120", "chrome/117", "firefox/123", "firefox/120", "firefox/118"]
       playwright_nb_tabs = 2
       playwright_disable_webrtc = True
@@ -826,6 +835,15 @@ snippet banser
                   or src.xpath("./@href").get()
               )
               if banner_type == BannerTypes.SPONSORED_PRODUCT or banner_type == BannerTypes.SHOWCASE:
+                  products = []
+                  for el in src.xpath(""):
+                      product = ItemBannerProduct()
+                      product["id"] = el.xpath("").get("")
+                      product["detail_link"] = urljoin(self.domain, el.xpath(".//@href").get())
+                      product["image_link"] = el.xpath(".//img/@src").get()
+                      products.append(product)
+                  item["products"] = products or None
+                  item["redirect_url"] = urljoin(self.domain, redirect_url)
                   yield item
               elif redirect_url:
                   item["redirect_url"] = urljoin(self.domain, redirect_url)
@@ -874,22 +892,13 @@ snippet banser
             keyword=keyword,
         )
 
-
       def add_products(self, response: HtmlResponse, banner: ItemBannerSearch):
-          products = []
-          if matches := response.xpath(""):
-              for m in matches:
-                  product = ItemBannerProduct()
-                  product["id"] = m.xpath("")
-                  product["detail_link"] = urljoin(self.domain,m.xpath(".//@href").get())
-                  product["image_link"] = m.xpath(".//img/@src").get()
-                  products.append(product)
-          elif pdp_match := response.xpath(""):
-              product = ItemBannerProduct()
-              product["id"] = pdp_match.xpath("")
-              product["detail_link"] = response.url
-              product["image_link"] = urljoin(self.domain, pdp_match.xpath(".//img/@src").get())
-              products.append(product)
-
-          banner["products"] = products or None
-          yield banner
+        products = []
+        for el in response.xpath(""):
+            product = ItemBannerProduct()
+            product["id"] = el.xpath("").get("")
+            product["detail_link"] = urljoin(self.domain, el.xpath(".//@href").get())
+            product["image_link"] = el.xpath(".//img/@src").get()
+            products.append(product)
+        banner["products"] = products or None
+        yield banner
