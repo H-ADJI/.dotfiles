@@ -12,8 +12,8 @@ font pango:JetBrainsMono Nerd Font Mono 12
 # Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
-set $menu dmenu_path | wmenu | xargs swaymsg exec --
-
+# set $menu dmenu_path | wmenu | xargs swaymsg exec --
+set $menu wofi
 # nightlight
 # exec gammastep -l 49.052502:2.038830
 include /etc/sway/config-vars.d/*
