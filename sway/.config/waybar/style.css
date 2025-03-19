@@ -3,7 +3,7 @@
   border-radius: 0;
   font-family:
     Roboto, "Font Awesome 5", "SFNS Display", Helvetica, Arial, sans-serif;
-  font-size: 15px;
+  font-size: 12px;
   min-height: 0;
 }
 
@@ -64,21 +64,21 @@ window#waybar.hidden {
 #tray,
 #mode,
 #idle_inhibitor {
-  padding: 0 20px;
-  margin: 0 10px;
+  padding: 0 30px;
+  margin: 0 20px;
   background-color: #282a36;
   color: #ffffff;
   border-radius: 20px;
 }
 
-#clock {
-}
-
-#battery {
-}
-
-#battery.charging {
-}
+/* #clock { */
+/* } */
+/**/
+/* #battery { */
+/* } */
+/**/
+/* #battery.charging { */
+/* } */
 
 @keyframes blink {
   to {
@@ -87,23 +87,23 @@ window#waybar.hidden {
   }
 }
 
-#battery.critical:not(.charging) {
-  background: #f53c3c;
-  animation-name: blink;
-  animation-duration: 0.5s;
-  animation-timing-function: linear;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
-}
+/* #battery.critical:not(.charging) { */
+/*   background: #f53c3c; */
+/*   animation-name: blink; */
+/*   animation-duration: 0.5s; */
+/*   animation-timing-function: linear; */
+/*   animation-iteration-count: infinite; */
+/*   animation-direction: alternate; */
+/* } */
 
-#cpu {
-}
-
-#memory {
-}
-
-#backlight {
-}
+/* #cpu { */
+/* } */
+/**/
+/* #memory { */
+/* } */
+/**/
+/* #backlight { */
+/* } */
 
 #network {
   margin: 0 0 0 10px;
@@ -111,29 +111,29 @@ window#waybar.hidden {
   border-radius: 20px 0 0 20px;
 }
 
-#network.disconnected {
-}
-
-#pulseaudio {
-}
-
-#pulseaudio.muted {
-}
-
-#custom-media {
-}
-
-.custom-spotify {
-}
-
-.custom-vlc {
-}
-
-#temperature {
-}
-
-#temperature.critical {
-}
+/* #network.disconnected { */
+/* } */
+/**/
+/* #pulseaudio { */
+/* } */
+/**/
+/* #pulseaudio.muted { */
+/* } */
+/**/
+/* #custom-media { */
+/* } */
+/**/
+/* .custom-spotify { */
+/* } */
+/**/
+/* .custom-vlc { */
+/* } */
+/**/
+/* #temperature { */
+/* } */
+/**/
+/* #temperature.critical { */
+/* } */
 
 #tray {
   border-radius: 0;
@@ -141,8 +141,8 @@ window#waybar.hidden {
   padding: 0 20px 0 0;
 }
 
-#idle_inhibitor {
-}
-
-#idle_inhibitor.activated {
-}
+/* #idle_inhibitor { */
+/* } */
+/**/
+/* #idle_inhibitor.activated { */
+/* } */

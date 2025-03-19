@@ -182,6 +182,7 @@ bindsym $mod+c exec clipman pick -t wofi
 # volume controls
 bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ 
 bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%-
+bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle 
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
@@ -212,11 +213,11 @@ exec_always {
     rm -f $WOBSOCK && mkfifo $WOBSOCK && tail -f $WOBSOCK | wob
     wl-paste -t text --watch clipman store --no-persist
 }
-default_border pixel 4
-# client.focused #4c7899 #285577 #ffffff #2e9ef4 #01fd1b
-# default_floating_border normal 4
-# gaps inner 8
-default_border pixel 2
-gaps inner 30
+# border around window
+default_border pixel 3
+# gap between windows
+gaps inner 20
+# coloring focused window
+client.focused #4c7899 #285577 #ffffff #2e9ef4 #01fd1b
 
 include /etc/sway/config.d/*
