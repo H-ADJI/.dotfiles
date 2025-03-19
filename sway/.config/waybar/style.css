@@ -36,6 +36,7 @@
 }
 
 #custom-music,
+#mode,
 #tray,
 #backlight,
 #clock,
@@ -51,6 +52,10 @@
   margin: 5px 0;
 }
 
+#mode {
+  color: @rosewater;
+  border-radius: 20px;
+}
 #network {
   color: @sapphire;
   border-radius: 0px 1rem 1rem 0px;

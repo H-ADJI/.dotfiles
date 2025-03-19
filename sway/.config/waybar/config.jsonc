@@ -2,7 +2,7 @@
 	"layer": "top",
 	"position": "top",
 	"modules-left": ["sway/workspaces"],
-	"modules-center": ["custom/music"],
+	"modules-center": ["custom/music", "sway/mode"],
 	"modules-right": [
 		"pulseaudio",
 		"clock",
@@ -18,12 +18,16 @@
 		"sort-by-name": true,
 		"format": " {icon} ",
 		"format-icons": {
-			"default": ""
+			"default": ""
 		}
 	},
 	"tray": {
 		"icon-size": 20,
 		"spacing": 20
+	},
+	"sway/mode": {
+		"format": "<span> {} </span>", // Icon: expand-arrows-alt
+		"tooltip": false
 	},
 	"custom/music": {
 		"format": "  {}",
@@ -69,11 +73,11 @@
 	},
 	"pulseaudio": {
 		"format": "{icon} {volume}%",
-		"format-muted": "",
+		"format-muted": " Muted",
 		"format-icons": {
 			"default": ["", "", " "]
 		},
-		"on-click": "pavucontrol"
+		"on-click": "amixer -q -D pulse sset Master toggle "
 	},
 	"custom/lock": {
 		"tooltip": false,
@@ -89,7 +93,7 @@
 		"format": "{ifname}",
 		"format-wifi": "Connected ",
 		"format-ethernet": "{ipaddr}/{cidr} 󰈀",
-		"format-disconnected": "Disconnected 󱛅",
+		"format-disconnected": "Disconnected 睊",
 		"tooltip-format": "{ifname} via {gwaddr} 󰛳",
 		"tooltip-format-wifi": "{essid} ({signalStrength}%) ",
 		"tooltip-format-ethernet": "{ifname} ",
