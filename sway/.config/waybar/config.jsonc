@@ -2,10 +2,9 @@
 	"layer": "top",
 	"position": "top",
 	"modules-left": ["sway/workspaces"],
-	"modules-center": ["custom/music", "sway/mode"],
+	"modules-center": ["custom/music", "clock", "sway/mode"],
 	"modules-right": [
 		"pulseaudio",
-		"clock",
 		"cpu",
 		"memory",
 		"network",
@@ -34,7 +33,7 @@
 		"escape": true,
 		"interval": 5,
 		"tooltip": false,
-		"exec": "playerctl metadata --format='{{ title }}'",
+		"exec": "playerctl metadata --format='{{ artist }} - {{ title }}'",
 		"on-click": "playerctl play-pause",
 		"max-length": 50
 	},
@@ -85,7 +84,7 @@
 	},
 	"custom/lock": {
 		"tooltip": false,
-		"on-click": "sh -c '(sleep 0.5s; swaylock)' & disown",
+		"on-click": "sh -c '(sleep 0.2s; swaylock)' & disown",
 		"format": ""
 	},
 	"custom/power": {
