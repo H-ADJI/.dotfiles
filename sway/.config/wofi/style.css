@@ -31,7 +31,7 @@
 }
 
 #window {
-  /* background: @teal; */
+  background: @base;
   margin: auto;
   padding: 10px;
   border-radius: 10px;
@@ -59,11 +59,10 @@
 }
 
 #entry:selected {
-  background-color: @lavender;
-  color: @flamingo;
+  background-color: @overlay1;
 }
 
 #text {
-  margin: 2px;
-  color: @subtext2;
+  margin: 4px;
+  color: @text;
 }

@@ -10,7 +10,7 @@ set $down j
 set $up k
 set $right l
 # Terminal
-set $term kitty
+set $term alacritty
 # Fonts
 font pango:JetBrainsMono Nerd Font Mono 12
 # Your preferred application launcher
