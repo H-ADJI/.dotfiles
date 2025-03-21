@@ -2,7 +2,8 @@
 set $mod Mod4
 
 set $WOBSOCK $XDG_RUNTIME_DIR/wob.sock
-
+# enable screensharing
+exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
 # Home row direction keys, like vim
 set $left h
 set $down j
