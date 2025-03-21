@@ -1,6 +1,6 @@
 [window]
 opacity = 0.9
-padding.x = 90
+padding.x = 120
 padding.y = 90
 startup_mode = "Maximized"
 [scrolling]
