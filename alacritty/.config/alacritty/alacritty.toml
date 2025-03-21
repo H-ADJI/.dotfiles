@@ -1,7 +1,7 @@
 [window]
-# opacity = 0.99999999
-padding.x = 30
-padding.y = 30
+opacity = 0.8
+padding.x = 90
+padding.y = 90
 decorations = "None"
 decorations_theme_variant = "Light" # "Dark"
 startup_mode = "Maximized"
@@ -12,7 +12,7 @@ normal = { style = "Regular", family = "JetBrainsMono Nerd Font" }
 bold = { style = "Bold", family = "JetBrainsMono Nerd Font" }
 bold_italic = { style = "Bold Italic", family = "JetBrainsMono Nerd Font" }
 italic = { style = "Italic", family = "JetBrainsMono" }
-size = 13.0
+size = 14.0
 [colors.bright]
 black = "#444b6a"
 blue = "#7da6ff"
@@ -30,13 +30,13 @@ cyan = "#449dab"
 green = "#9ece6a"
 magenta = "#ad8ee6"
 red = "#f7768e"
-white = "#787c99"
+white = "#ffffff"
 yellow = "#e0af68"
 
 [colors.primary]
 background = "#1a1b26"
 foreground = "#a9b1d6"
 
-# [shell]
-# program = "/bin/zsh"
-# args = ["-c", "zellij"]
+[shell]
+program = "/bin/zsh"
+args = ["-c", "tmux"]
