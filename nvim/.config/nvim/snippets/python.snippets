@@ -1,3 +1,44 @@
+snippet bancatmsreq banner category multispider start_requests
+    def start_requests(self):
+        if self.paths_urls:
+            for _, url, _ in self.paths_urls:
+                yield PlaywrightRequest(
+                    url,
+                    callback=self.parse_banners,
+                    meta={
+                        "playwright": {
+                            "wait_time": self.wait_time,
+                            "action": self.get_banners,
+                        },
+                    },
+                    cb_kwargs=dict(is_home=url == self.domain),
+                )
+        else:
+            yield PlaywrightRequest(
+                f"{self.domain}/cat/all",
+                callback=self.parse_categories,
+                meta={
+                    "playwright": {
+                        "wait_time": self.wait_time,
+                    },
+                },
+            )
+
+    def parse_categories(self, response: HtmlResponse):
+        yield RequestShelf(
+            self.domain,
+            callback=self.parse_banners,
+            meta={"path": []},
+            dont_filter=True,
+        )
+        for category in response.xpath(""):
+            url = category.xpath("./@href").get("")
+            yield RequestShelf(
+                urljoin(self.domain, url),
+                callback=self.parse_banners,
+                meta={"path": []},
+            )
+
 snippet plr playwright request snippet
   yield PlaywrightRequest(
                         $1,
