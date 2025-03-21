@@ -2,11 +2,9 @@
 opacity = 0.8
 padding.x = 90
 padding.y = 90
-decorations = "None"
-decorations_theme_variant = "Light" # "Dark"
 startup_mode = "Maximized"
 [scrolling]
-history = 50_000
+history = 10_000
 [font]
 normal = { style = "Regular", family = "JetBrainsMono Nerd Font" }
 bold = { style = "Bold", family = "JetBrainsMono Nerd Font" }
