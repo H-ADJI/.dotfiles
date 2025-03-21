@@ -37,6 +37,6 @@ yellow = "#e0af68"
 background = "#1a1b26"
 foreground = "#a9b1d6"
 
-[shell]
-program = "/bin/zsh"
-args = ["-c", "tmux"]
+# [shell]
+# program = "/bin/zsh"
+# args = ["-c", "tmux"]
