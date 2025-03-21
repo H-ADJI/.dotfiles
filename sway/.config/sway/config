@@ -204,9 +204,14 @@ bindsym $mod+Shift+g gaps inner all minus 10
 bindsym $mod+Control+g gaps outer all plus 10
 bindsym $mod+Control+Shift+g gaps outer all minus 10
 # volume controls
-bindsym XF86AudioRaiseVolume exec amixer -q -D pulse sset Master 5%+ 
-bindsym XF86AudioLowerVolume exec amixer -q -D pulse sset Master 5%-
-bindsym XF86AudioMute exec amixer -q -D pulse sset Master toggle 
+bindsym XF86AudioRaiseVolume exec amixer -q -D pipewire sset Master 5%+ 
+bindsym XF86AudioLowerVolume exec amixer -q -D pipewire sset Master 5%-
+bindsym XF86AudioMute exec amixer -q -D pipewire sset Master toggle 
+bindsym $mod+m exec amixer -q -D pipewire sset Capture toggle 
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
+bindsym XF86AudioStop exec playerctl stop
 # Status Bar:
 #
 # Read `man 5 sway-bar` for more information about this section.
