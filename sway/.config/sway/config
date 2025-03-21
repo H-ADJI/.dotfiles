@@ -2,6 +2,7 @@
 set $mod Mod4
 # enable screensharing
 exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
+exec dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
 exec ~/.config/sway/sunset.sh
 # Home row direction keys, like vim
 set $left h
@@ -192,6 +193,25 @@ mode $screenshot {
   }
 }
 bindsym --to-code $mod+s mode $screenshot
+#
+# notification mode
+set {
+  $notification "Notifications : dismiss [A]ll or [L]ast"
+
+  $notif-cmd fnottctl dismiss
+}
+bindsym --to-code $mod+n mode $notification
+mode $notification {
+  bindsym --to-code {
+    l exec $notif-cmd , mode "notification"
+    # w mode "default", exec $screenshot-cmd window broken option
+    a mode "default", exec $notif-cmd all
+
+    Return mode "default"
+    Escape mode "default"
+    $mod+x mode "default"
+  }
+}
 # clipboard menu
 bindsym $mod+c exec clipman pick -t wofi
 bindsym $mod+Delete exec ~/.config/sway/lock.sh
