@@ -25,7 +25,7 @@
 		"spacing": 20
 	},
 	"sway/mode": {
-		"format": "<span> {} </span>", // Icon: expand-arrows-alt
+		"format": "<b> Mode :</b> <span> {} </span>", // Icon: expand-arrows-alt
 		"tooltip": false
 	},
 	"custom/music": {
@@ -40,8 +40,8 @@
 	"clock": {
 		"timezone": "Europe/Paris",
 		"tooltip-format": "<big>{:%Y %B}</big>\n<tt><big>{calendar}</big></tt>",
-		"format": "{: %I:%M %p   %d/%m/%Y}",
-		"format-alt": " {:%d/%m/%Y}"
+		"format": "{: %I:%M %p   %d/%m/%Y}"
+		// "format-alt": " {:%d/%m/%Y}"
 		// "format": " {:%H:%M}"
 	},
 	"backlight": {
