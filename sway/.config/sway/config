@@ -144,7 +144,7 @@ output DP-2 {
 #
 # Resizing containers:
 #
-mode "resize" {
+mode "Resize" {
     # left will shrink the containers width
     # right will grow the containers width
     # up will shrink the containers height
@@ -164,7 +164,7 @@ mode "resize" {
     bindsym Return mode "default"
     bindsym Escape mode "default"
 }
-bindsym $mod+r mode "resize"
+bindsym $mod+r mode "Resize"
 
 # Keyboard
 input "type:keyboard" {
@@ -215,6 +215,7 @@ mode $notification {
 # clipboard menu
 bindsym $mod+c exec clipman pick -t wofi
 bindsym $mod+Delete exec ~/.config/sway/lock.sh
+bindsym $mod+BackSpace exec ~/.config/sway/wofi-power-menu.sh
 
 bindsym $mod+g gaps inner all plus 10
 bindsym $mod+Shift+g gaps inner all minus 10
@@ -231,6 +232,8 @@ bindsym $mod+m exec amixer -q -D pipewire sset Capture toggle
 bindsym XF86AudioPlay exec playerctl play-pause
 bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
+bindsym Shift+XF86AudioRaiseVolume exec playerctl next
+bindsym Shift+XF86AudioLowerVolume exec playerctl previous
 bindsym XF86AudioStop exec playerctl stop
 # Status Bar:
 #
