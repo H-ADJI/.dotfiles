@@ -34,5 +34,7 @@ done
 
 # If a valid option was selected, execute its corresponding action
 if [ "$index" -ne -1 ]; then
+    paplay /usr/share/sounds/freedesktop/stereo/service-logout.oga &
+    sleep 1.2
     ${actions[$index]}
 fi

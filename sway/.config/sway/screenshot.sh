@@ -9,10 +9,10 @@ APP_NAME="Sway Screenshot"
 case $1 in
     screen)
         grim - | tee "$FILENAME" | wl-copy
-        notify-send "Screenshot taken" "Saved to $FILENAME" -t "$timeout" -i "$FILENAME" -a "$APP_NAME"
         ;;
     region)
         grim -g "$(slurp)" - | tee "$FILENAME" | wl-copy
-        notify-send "Screenshot taken" "Saved to $FILENAME" -t "$timeout" -i "$FILENAME" -a "$APP_NAME"
         ;;
 esac
+notify-send "Screenshot taken" "Saved to $FILENAME" -t "$timeout" -i "$FILENAME" -a "$APP_NAME"
+paplay /usr/share/sounds/freedesktop/stereo/screen-capture.oga

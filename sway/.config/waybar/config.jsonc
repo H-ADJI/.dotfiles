@@ -84,7 +84,7 @@
 	},
 	"custom/lock": {
 		"tooltip": false,
-		"on-click": "sh -c '(sleep 0.2s; swaylock)' & disown",
+		"on-click": "~/.config/sway/lock.sh",
 		"format": ""
 	},
 	"custom/power": {
