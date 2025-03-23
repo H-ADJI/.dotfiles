@@ -254,10 +254,20 @@ gaps inner 20
 # coloring focused window 
 # TODO: change colors
 #
+# Catppuccin Mocha color definitions:
+# Base:      #1E1E2E
+# Mantle:    #181825
+# Crust:     #11111B
+# Rosewater: #F5E0DC
+# Mauve:     #CBA6F7
+# Lavender:  #B4BEFE
+# Blue:      #89B4FA
+# Red:       #F38BA8
+
 # class                 border  backgr. text    indicator child_border
-client.focused          #6272a4 #285577 #ffffff #2e9ef4   #6272a4 
-client.focused_inactive #282a36 #5f676a #ffffff #484e50   #282a36
-client.unfocused        #282a36 #222222 #888888 #292d2e   #282a36
-client.urgent           #282a36 #900000 #ffffff #900000   #282a36
-client.placeholder      #282a36 #0c0c0c #ffffff #000000   #282a36 
+client.focused          #5A9AD6 #1E1E2E #ffffff #89B4FA #6272a4 
+client.focused_inactive #181825 #1E1E2E #89B4FA #181825 #181825
+client.unfocused        #11111B #1E1E2E #7A8A99 #11111B #11111B
+client.urgent           #89B4FA #141A20 #ffffff #89B4FA #89B4FA
+client.placeholder      #11111B #1E1E2E #7A8A99 #11111B #11111B
 include /etc/sway/config.d/*
