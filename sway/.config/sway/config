@@ -111,7 +111,7 @@ output DP-2 {
     # You can "split" the current object of your focus with
     # $mod+b or $mod+v, for horizontal and vertical splits
     # respectively.
-    bindsym $mod+b splith
+    # bindsym $mod+b splith
     bindsym $mod+v splitv
 
     # Switch the current container between different layout styles
@@ -224,6 +224,7 @@ bindsym $mod+Control+g gaps outer all plus 10
 bindsym $mod+Control+Shift+g gaps outer all minus 10
 # timer 
 bindsym $mod+t exec ~/.config/sway/activate-timer.sh
+bindsym $mod+b exec brave-browser --password-store=basic
 # emulator
 bindsym $mod+Shift+a exec ~/apps/emulator
 # volume controls
