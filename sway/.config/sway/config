@@ -224,6 +224,8 @@ bindsym $mod+Control+g gaps outer all plus 10
 bindsym $mod+Control+Shift+g gaps outer all minus 10
 # timer 
 bindsym $mod+t exec ~/.config/sway/activate-timer.sh
+# emulator
+bindsym $mod+Shift+a exec ~/apps/emulator
 # volume controls
 bindsym XF86AudioRaiseVolume exec amixer -q -D pipewire sset Master 5%+ 
 bindsym XF86AudioLowerVolume exec amixer -q -D pipewire sset Master 5%-
