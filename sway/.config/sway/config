@@ -120,9 +120,11 @@ output DP-2 {
     bindsym $mod+e layout toggle split
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
+    # resize floating
+    bindsym $mod+Shift+f resize set width 2100 height 1200
+    # floating_minimum_size 2100 x 1200
 
     # Toggle the current focus between tiling and floating mode
-    floating_minimum_size 2100 x 1200
     bindsym $mod+Shift+space floating toggle
 
     # Swap focus between the tiling area and the floating area
