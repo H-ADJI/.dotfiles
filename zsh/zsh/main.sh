@@ -15,13 +15,13 @@ source ~/zsh/lib/go.sh
 source ~/zsh/lib/history.sh
 source ~/zsh/lib/keybinds.sh
 source ~/zsh/lib/kitty.sh
+source ~/zsh/lib/rust.sh
 source ~/zsh/lib/leetcode.sh
 source ~/zsh/lib/nala.sh
 source ~/zsh/lib/npm.sh
 source ~/zsh/lib/nvim.sh
 source ~/zsh/lib/path.sh
 source ~/zsh/lib/python.sh
-source ~/zsh/lib/rust.sh
 source ~/zsh/lib/scrapy.sh
 source ~/zsh/lib/tmux.sh
 source ~/zsh/lib/tmuxifier.sh
