@@ -1,0 +1,4 @@
+unbindsym $mod+Return 
+set $term alacritty
+# Launch the terminal
+bindsym $mod+Return exec $term

@@ -1,0 +1,6 @@
+output * bg ~/Pictures/winter-wall2.png fill
+# Monitor 
+output DP-2 {
+   resolution 2560x1440@59.951Hz 
+   position 2560,0
+}

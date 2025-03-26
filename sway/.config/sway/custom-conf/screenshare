@@ -1,0 +1,8 @@
+
+# add environment variables that might be missing
+# exec dbus-update-activation-environment --systemd WAYLAND_DISPLAY XDG_CURRENT_DESKTOP 
+# exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP DISPLAY SWAYSOCK
+exec hash dbus-update-activation-environment 2>/dev/null && \
+     dbus-update-activation-environment --systemd XDG_CURRENT_DESKTOP DISPLAY WAYLAND_DISPLAY SWAYSOCK
+# enable  dbus for IPC (screensharing ...)
+exec_always dbus-daemon --session --address=unix:path=$XDG_RUNTIME_DIR/bus
