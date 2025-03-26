@@ -62,6 +62,6 @@ docker_spider() {
         --env-file .env --env V4_PROXIES="$V4_PROXIES" \
         --env GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES="$GOOGLE_APPLICATION_CREDENTIALS_BANNERS_IMAGES" \
         --env GOOGLE_APPLICATION_CREDENTIALS="$GOOGLE_APPLICATION_CREDENTIALS" \
-        test_docker_spider scrapy crawl "$SPIDER_NAME" "$EXTRA_ARGS"
+        test_docker_spider scrapy crawl $SPIDER_NAME $EXTRA_ARGS
 
 }
