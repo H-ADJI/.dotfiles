@@ -1,0 +1,19 @@
+font pango:JetBrainsMono Nerd Font Mono 12
+default_border pixel 6
+gaps inner 20
+# Catppuccin Mocha color definitions:
+# Base:      #1E1E2E
+# Mantle:    #181825
+# Crust:     #11111B
+# Rosewater: #F5E0DC
+# Mauve:     #CBA6F7
+# Lavender:  #B4BEFE
+# Blue:      #89B4FA
+# Red:       #F38BA8
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #5A9AD6 #1E1E2E #ffffff #89B4FA #6272a4 
+client.focused_inactive #181825 #1E1E2E #89B4FA #181825 #181825
+client.unfocused        #11111B #1E1E2E #7A8A99 #11111B #11111B
+client.urgent           #89B4FA #141A20 #ffffff #89B4FA #89B4FA
+client.placeholder      #11111B #1E1E2E #7A8A99 #11111B #11111B
