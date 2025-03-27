@@ -1,4 +1,4 @@
-sudo nala install libzbar0
+# sudo nala install libzbar0
 sudo mkdir /opt/T1000
 sudo chmod -R 777 /opt/T1000
 sudo mkdir -p /opt/T1000/fonts/
