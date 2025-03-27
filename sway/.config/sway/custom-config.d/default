@@ -1,4 +1,10 @@
-unbindsym $mod+Return 
+# terminal
 set $term alacritty
-# Launch the terminal
+unbindsym $mod+Return 
 bindsym $mod+Return exec $term
+
+# browser
+set $browser brave --password-store=basic
+unbindsym $mod+o
+bindsym $mod+o exec $browser 
+
