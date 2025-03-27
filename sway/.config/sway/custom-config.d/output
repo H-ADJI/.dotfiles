@@ -1,3 +1,4 @@
+exec ~/.config/sway/scripts/
 output * bg ~/.config/assets/background.png fill
 # Monitor 
 output DP-2 {
