@@ -1,4 +1,4 @@
-output * bg ~/.config/assets/wallpaper.jpg
+output * bg ~/.config/assets/wallpaper.jpg fill
 # Monitor 
 output DP-2 {
    resolution 2560x1440@59.951Hz 
