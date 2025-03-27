@@ -14,7 +14,7 @@ bindsym $mod+o exec $browser
 set {
   $screenshot "Screenshot: [S]creen or [R]egion"
 
-  $screenshot-cmd ~/.config/sway/screenshot.sh
+  $screenshot-cmd ~/.config/sway/scripts/screenshot.sh
 }
 
 mode $screenshot {
@@ -29,4 +29,3 @@ mode $screenshot {
   }
 }
 bindsym --to-code $mod+s mode $screenshot
-
