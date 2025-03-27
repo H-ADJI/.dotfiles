@@ -1,4 +1,4 @@
-exec ~/.config/s
+exec ~/.config/sway/scripts/sunset.sh
 output * bg ~/.config/assets/background.png fill
 # Monitor 
 output DP-2 {
