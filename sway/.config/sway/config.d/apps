@@ -5,7 +5,7 @@ set $term alacritty
 bindsym $mod+Return exec $term
 
 # Set default browser
-set $browser brave --password-store=basic
+set $browser brave
 # Launch the browser
 bindsym $mod+o exec $browser
 
