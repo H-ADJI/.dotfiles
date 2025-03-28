@@ -4,4 +4,3 @@
 
 # user config directory
 include $HOME/.config/sway/config.d/*
-include $HOME/.config/sway/custom-config.d/*
