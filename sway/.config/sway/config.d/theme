@@ -14,7 +14,7 @@ smart_borders on
 
 # Set wallpaper:
 # Wallpaper
-output * bg ~/Pictures/assets/background.png fill
+output * bg ~/.config/assets/evening-sky.png fill
 # exec ~/.config/sway/scripts/swaybg.sh
 
 # Title format for windows
