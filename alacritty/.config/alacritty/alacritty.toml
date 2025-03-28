@@ -1,5 +1,5 @@
 [window]
-opacity = 0.95
+opacity = 0.90
 padding.x = 120
 padding.y = 90
 startup_mode = "Maximized"
@@ -10,7 +10,7 @@ normal = { style = "bold", family = "JetBrainsMono Nerd Font" }
 # bold = { style = "Bold", family = "JetBrainsMono Nerd Font" }
 # bold_italic = { style = "Bold Italic", family = "JetBrainsMono Nerd Font" }
 # italic = { style = "Italic", family = "JetBrainsMono" }
-size = 14.0
+size = 16.0
 [colors.bright]
 black = "#444b6a"
 blue = "#7da6ff"
