@@ -29,7 +29,7 @@
 
 	"modules-center": ["custom/music", "sway/mode", "clock"],
 	"custom/music": {
-		"format": "  {}",
+		"format": " 🎶  {}",
 		"escape": true,
 		"interval": 5,
 		"tooltip": false,

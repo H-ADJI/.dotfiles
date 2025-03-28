@@ -62,6 +62,7 @@
 #mode,
 #network,
 #custom-keyboard-layout,
+#custom-music,
 #idle_inhibitor,
 #cpu,
 #memory,
@@ -72,6 +73,7 @@
 #tray {
   padding: 0.5rem 0.6rem;
   margin: 1px 0px;
+  font-weight: bold;
 }
 
 /* -----------------------------------------------------------------------------
