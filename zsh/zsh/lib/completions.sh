@@ -1,8 +1,7 @@
-# initilizing and loading auto-completions
-autoload -Uz compinit && compinit -C
-
 # adding completiong function for nala - typer-cli to fpath
 fpath+=~/.zfunc
+autoload -Uz compinit
+compinit
 
 # Case insensitive completion match
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
