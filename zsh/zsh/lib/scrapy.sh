@@ -36,10 +36,13 @@ bindkey '^x^f' fzf_spiders
 
 shub_deploy() {
     shub image upload "$SHUB_DEVZONE" --build-arg PYPI_SECRET="$PYPI_SECRET"
+}
+shub_deploy_shortcut() {
+    shub_deploy
     zle redisplay
 }
-zle -N shub_deploy
-bindkey '^x^u' shub_deploy
+zle -N shub_deploy_shortcut
+bindkey '^x^u' shub_deploy_shortcut
 
 # running a spider inside docker
 docker_spider() {
