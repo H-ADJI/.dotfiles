@@ -79,6 +79,7 @@ snippet bansermobile
       oxylabs_dc_country = oxylabs_residential_country = iproyal_residential_country = "$3"
       tls = browser = ["chrome/133", "firefox/133"]
       custom_settings = {
+        "HTTPCACHE_ENABLED": 1,
         "SPIDER_MIDDLEWARES": {
             "middlewares.pagination_position_middleware.PositionDefaultMiddleware": None,
             "middlewares.image_downloading_middleware.ImageDownloadingDefaultMiddleware": 999,
