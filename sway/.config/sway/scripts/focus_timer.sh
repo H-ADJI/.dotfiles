@@ -3,19 +3,27 @@
 DURATION=5400
 timeout=8000
 APP_NAME="Timer"
-# The script will run continuously so Waybar gets live updates.
-# Calculate hours and minutes correctly
+
 hours=$((DURATION / 3600))
 minutes=$(((DURATION % 3600) / 60)) # Get remaining minutes
 
 # Format as HH:MM
 hours=$(printf "%02d" $hours)
 minutes=$(printf "%02d" $minutes)
+
 notify-send "Timer Activated" "Your $hours:$minutes of focused work has started !" -t "$timeout" -a "$APP_NAME"
+paplay /usr/share/sounds/freedesktop/stereo/complete.oga
+steps=1
+
 while [ $DURATION -ge 0 ]; do
-    sleep 1
-    DURATION=$((DURATION - 1))
+    if [ "$DURATION" -eq $((DURATION / 3)) ] || [ "$DURATION" -eq $((2 * DURATION / 3)) ]; then
+        notify-send "Short Break" "Take a quick 1-minute break ✨" -t "$timeout" -a "$APP_NAME"
+        paplay /usr/share/sounds/freedesktop/stereo/complete.oga
+        sleep 60
+    fi
+    sleep $steps
+    DURATION=$((DURATION - steps))
 done
-# When the countdown reaches zero, send a notification
+
 notify-send "Time is up" "Time to rest your eyes and take a walk!" -t "$timeout" -a "$APP_NAME"
 paplay /usr/share/sounds/freedesktop/stereo/complete.oga
