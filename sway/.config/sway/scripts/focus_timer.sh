@@ -17,7 +17,7 @@ notify() {
     notify-send "$1" "$2" -t "$timeout" -a "$APP_NAME"
     paplay /usr/share/sounds/freedesktop/stereo/complete.oga
 }
-notify "Timer Activated" "Your $hours:$minutes of focused work has started !"
+notify "Timer Activated" "Your ${hours}h$minutes of focused work has started !"
 
 while [ $DURATION -ge 0 ]; do
     if [ "$DURATION" -eq $((DURATION / 3)) ] || [ "$DURATION" -eq $((2 * DURATION / 3)) ]; then
