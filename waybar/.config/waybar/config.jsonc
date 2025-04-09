@@ -42,7 +42,7 @@
 		"tooltip": false
 	},
 	"clock": {
-		"format": " 󰅐  {:%H:%M  - %A %d/%m/%d}",
+		"format": " 󰅐  {:%H:%M  - %A %d/%m/%y}",
 		"tooltip-format": " {:%A %m/%d}\n\n<tt><big>{calendar}</big></tt>",
 		"calendar": {
 			"on-scroll": 1,
